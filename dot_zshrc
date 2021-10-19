@@ -120,7 +120,7 @@ export EDITOR='nvim'
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
-alias la="exa -la --group-directories-first --icons --color=always --group | less -R"
+alias la="exa -la --group-directories-first --icons --color=always --group | less -iXRS"
 alias -g G="| grep -i"
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
