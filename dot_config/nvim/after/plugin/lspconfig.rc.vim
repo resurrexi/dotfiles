@@ -2,13 +2,18 @@ if !exists('g:lspconfig')
   finish
 endif
 
+let g:coq_settings = { 'auto_start': v:true }
+
 lua << EOF
 --vim.lsp.set_log_level("debug")
 EOF
 
 lua << EOF
-local nvim_lsp = require('lspconfig')
+local nvim_lsp = require'lspconfig'
 local protocol = require'vim.lsp.protocol'
+
+-- import coq
+local coq = require'coq'
 
 -- Use an on_attach function to only map the following keys 
 -- after the language server attaches to the current buffer
@@ -49,8 +54,6 @@ local on_attach = function(client, bufnr)
     vim.api.nvim_command [[augroup END]]
   end
 
-  require'completion'.on_attach(client, bufnr)
-
   --protocol.SymbolKind = { }
   protocol.CompletionItemKind = {
     '', -- Text
@@ -81,14 +84,13 @@ local on_attach = function(client, bufnr)
   }
 end
 
-nvim_lsp.flow.setup {
+nvim_lsp.tsserver.setup(coq.lsp_ensure_capabilities({
   on_attach = on_attach
-}
+}))
 
-nvim_lsp.tsserver.setup {
-  on_attach = on_attach,
-  filetypes = { "typescript", "typescriptreact", "typescript.tsx" }
-}
+nvim_lsp.pyright.setup(coq.lsp_ensure_capabilities({
+  on_attach = on_attach
+}))
 
 nvim_lsp.diagnosticls.setup {
   on_attach = on_attach,
@@ -96,18 +98,25 @@ nvim_lsp.diagnosticls.setup {
   init_options = {
     linters = {
       eslint = {
-        command = 'eslint_d',
-        rootPatterns = { '.git' },
+        command = './node_modules/.bin/eslint',
+        rootPatterns = { 
+          '.eslintrc.js',
+          '.eslintrc.cjs',
+          '.eslintrc.yaml',
+          '.eslintrc.yml',
+          '.eslintrc.json',
+          'package.json'
+        },
         debounce = 100,
         args = { '--stdin', '--stdin-filename', '%filepath', '--format', 'json' },
-        sourceName = 'eslint_d',
+        sourceName = 'eslint',
         parseJson = {
           errorsRoot = '[0].messages',
           line = 'line',
           column = 'column',
           endLine = 'endLine',
           endColumn = 'endColumn',
-          message = '[eslint] ${message} [${ruleId}]',
+          message = '${message} [${ruleId}]',
           security = 'severity'
         },
         securities = {
@@ -115,6 +124,66 @@ nvim_lsp.diagnosticls.setup {
           [1] = 'warning'
         }
       },
+      pylint = {
+        sourceName = 'pylint',
+        command = 'pylint',
+        debounce = 500,
+        args = {
+          '--output-format',
+          'text',
+          '--score',
+          'no',
+          '--msg-template',
+          "'{line}:{column}:{category}:{msg} ({msg_id}:{symbol})'",
+          '%file'
+        },
+        formatPattern = {
+          "^(\\d+?):(\\d+?):([a-z]+?):(.*)$",
+          {
+            line = 1,
+            column = 2,
+            security = 3,
+            message = 4
+          }
+        },
+        rootPatterns = { '.git', 'pyproject.toml', 'setup.py', '.pylintrc' },
+        securities = {
+          informational = 'hint',
+          refactor = 'info',
+          convention = 'info',
+          warning = 'warning',
+          error = 'error',
+          fatal = 'error'
+        },
+        offsetColumn = 1,
+        formatLines = 1
+      },
+      flake8 = {
+        command = 'flake8',
+        debounce = 100,
+        args = { '--format=%(row)d,%(col)d,%(code).1s,%(code)s: %(text)s', '-' },
+        rootPatterns = { '.flake8', 'setup.cfg', 'tox.ini' },
+        offsetLine = 0,
+        offsetColumn = 0,
+        sourceName = 'flake8',
+        formatLines = 1,
+        formatPattern = {
+          '(\\d+),(\\d+),([A-Z]),(.*)(\\r|\\n)*$',
+          {
+            line = 1,
+            column = 2,
+            security = 3,
+            message = 4
+          }
+        },
+        securities = {
+          W = 'warning',
+          E = 'error',
+          F = 'error',
+          C = 'error',
+          N = 'error'
+        }
+      }
     },
     filetypes = {
       javascript = 'eslint',
@@ -123,25 +192,38 @@ nvim_lsp.diagnosticls.setup {
       typescriptreact = 'eslint',
     },
     formatters = {
-      eslint_d = {
-        command = 'eslint_d',
-        args = { '--stdin', '--stdin-filename', '%filename', '--fix-to-stdout' },
-        rootPatterns = { '.git' },
-      },
       prettier = {
-        command = 'prettier',
-        args = { '--stdin-filepath', '%filename' }
+        command = './node_modules/.bin/prettier',
+        args = { '--stdin', '--stdin-filepath', '%filepath' },
+        rootPatterns = {
+          '.prettierrc',
+          '.prettierrc.json',
+          '.prettierrc.toml',
+          '.prettierrc.json',
+          '.prettierrc.yml',
+          '.prettierrc.yaml',
+          '.prettierrc.json5',
+          '.prettierrc.js',
+          '.prettierrc.cjs',
+          'prettier.config.js',
+          'prettier.config.cjs'
+        }
+      },
+      black = {
+        command = 'black',
+        args = { '--quiet', '-' },
+        rootPatterns = { 'pyproject.toml' }
       }
     },
     formatFiletypes = {
       css = 'prettier',
-      javascript = 'eslint_d',
-      javascriptreact = 'eslint_d',
+      javascript = 'prettier',
+      javascriptreact = 'prettier',
       json = 'prettier',
       scss = 'prettier',
       less = 'prettier',
-      typescript = 'eslint_d',
-      typescriptreact = 'eslint_d',
+      typescript = 'prettier',
+      typescriptreact = 'prettier',
       json = 'prettier',
       markdown = 'prettier',
     }

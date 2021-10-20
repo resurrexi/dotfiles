@@ -17,7 +17,7 @@ if has("nvim")
   Plug 'neovim/nvim-lspconfig'
   Plug 'glepnir/lspsaga.nvim'
   Plug 'folke/lsp-colors.nvim'
-  Plug 'nvim-lua/completion-nvim'
+  Plug 'ms-jpq/coq_nvim', {'branch': 'coq'}
   Plug 'nvim-treesitter/nvim-treesitter', { 'do': ':TSUpdate' }
   Plug 'kyazdani42/nvim-web-devicons'
   Plug 'nvim-lua/popup.nvim'

@@ -130,3 +130,9 @@ if exists("&termguicolors") && exists("&winblend")
   colorscheme nord
 endif
 
+" allow local project config
+set exrc
+
+
+" run chezmoi apply whenever you save a dotfile
+autocmd BufWritePost ~/.local/share/chezmoi/* ! chezmoi apply --source-path %
