@@ -23,8 +23,14 @@ vnoremap <silent> # :<C-U>
   \gV:call setreg('"', old_reg, old_regtype)<CR>
 
 " Split window
-noremap <C-w><C-d> :split<CR><C-w>w
-noremap <C-w><C-r> :vsplit<CR><C-w>w
+noremap <C-w><C-d> :new<CR>
+noremap <C-w><C-r> :vnew<CR>
+
+" resize window
+noremap <C-w><C-left> <C-w><
+noremap <C-w><C-right> <C-w>>
+noremap <C-w><C-up> <C-w>+
+noremap <C-w><C-down> <C-w>-
 
 " clear highlighted text
 nnoremap <Esc><Esc> :noh<CR>
