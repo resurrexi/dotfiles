@@ -1,16 +1,11 @@
 " Description: Keymaps
 
-nnoremap <S-C-p> "0p
-" Delete without yank
-nnoremap <leader>d "_d
+" set leader key
+let mapleader = ","
+
+" delete without registering
 nnoremap x "_x
-
-" Increment/decrement
-nnoremap + <C-a>
-nnoremap - <C-x>
-
-" Select all
-nmap <C-a> gg<S-v>G
+nnoremap X "_X
 
 " Save with root permission
 command! W w !sudo tee > /dev/null %
@@ -27,28 +22,10 @@ vnoremap <silent> # :<C-U>
   \escape(@", '?\.*$^~['), '\_s\+', '\\_s\\+', 'g')<CR><CR>
   \gV:call setreg('"', old_reg, old_regtype)<CR>
 
-"-----------------------------
-" Tabs
-
-" Open current directory
-nmap te :tabedit 
-nmap <S-Tab> :tabprev<Return>
-nmap <Tab> :tabnext<Return>
-
-"------------------------------
-" Windows
-
 " Split window
-nmap ss :split<Return><C-w>w
-nmap sv :vsplit<Return><C-w>w
-" Move window
-map sh <C-w>h
-map sk <C-w>k
-map sj <C-w>j
-map sl <C-w>l
-" Resize window
-nmap s<left> <C-w><
-nmap s<right> <C-w>>
-nmap s<up> <C-w>+
-nmap s<down> <C-w>-
+noremap <C-w><C-d> :split<CR><C-w>w
+noremap <C-w><C-r> :vsplit<CR><C-w>w
+
+" clear highlighted text
+nnoremap <Esc><Esc> :noh<CR>
 

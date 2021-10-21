@@ -5,22 +5,26 @@ scriptencoding utf-8
 " stop loading config if it's on tiny or small
 if !1 | finish | endif
 
+syntax on
 set nocompatible
 set number
-syntax enable
 set fileencodings=utf-8,sjis,euc-jp,latin
 set encoding=utf-8
 set title
-set autoindent
 set background=dark
 set nobackup
 set hlsearch
+set ignorecase
+set incsearch
+set smarttab
 set showcmd
 set cmdheight=1
 set laststatus=2
 set expandtab
-"let loaded_matchparen = 1
+set splitright
+set splitbelow
 set shell=zsh
+set scrolloff=10
 
 " incremental substitution (neovim)
 if has('nvim')
@@ -29,17 +33,9 @@ endif
 
 " Suppress appending <PasteStart> and <PasteEnd> when pasting
 set t_BE=
-
 set nosc noru nosm
 " Don't redraw while executing macros (good performance config)
 set lazyredraw
-"set showmatch
-" How many tenths of a second to blink when matching brackets
-"set mat=2
-" Ignore case when searching
-set ignorecase
-" Be smart when using tabs ;)
-set smarttab
 " indents
 filetype plugin indent on
 set shiftwidth=2
@@ -58,16 +54,11 @@ autocmd InsertLeave * set nopaste
 " Add asterisks in block comments
 set formatoptions+=r
 
-"}}}
-
-" Highlights "{{{
+" Highlights
 " ---------------------------------------------------------------------
 set cursorline
-"set cursorcolumn
-
 " Set cursor line color on visual mode
 highlight Visual cterm=NONE ctermbg=236 ctermfg=NONE guibg=Grey40
-
 highlight LineNr cterm=none ctermfg=240 guifg=#2b506e guibg=#000000
 
 augroup BgHighlight
@@ -81,9 +72,7 @@ if &term =~ "screen"
   autocmd VimLeave * silent!  exe '!echo -n "\ek[`hostname`:`basename $PWD`]\e\\"'
 endif
 
-"}}}
-
-" File types "{{{
+" File types "
 " ---------------------------------------------------------------------
 " JavaScript
 au BufNewFile,BufRead *.es6 setf javascript
@@ -100,9 +89,7 @@ autocmd FileType coffee setlocal shiftwidth=2 tabstop=2
 autocmd FileType ruby setlocal shiftwidth=2 tabstop=2
 autocmd FileType yaml setlocal shiftwidth=2 tabstop=2
 
-"}}}
-
-" Imports "{{{
+" Imports
 " ---------------------------------------------------------------------
 runtime ./plug.vim
 if has("unix")
@@ -114,9 +101,8 @@ if has("unix")
 endif
 
 runtime ./maps.vim
-"}}}
 
-" Syntax theme "{{{
+" Syntax theme
 " ---------------------------------------------------------------------
 
 " true color
@@ -132,7 +118,6 @@ endif
 
 " allow local project config
 set exrc
-
 
 " run chezmoi apply whenever you save a dotfile
 autocmd BufWritePost ~/.local/share/chezmoi/* ! chezmoi apply --source-path %
