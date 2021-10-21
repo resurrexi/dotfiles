@@ -92,9 +92,10 @@ nvim_lsp.pyright.setup(coq.lsp_ensure_capabilities({
   on_attach = on_attach
 }))
 
+-- https://github.com/iamcco/coc-diagnostic/blob/master/src/config.ts
 nvim_lsp.diagnosticls.setup {
   on_attach = on_attach,
-  filetypes = { 'javascript', 'javascriptreact', 'json', 'typescript', 'typescriptreact', 'css', 'less', 'scss', 'markdown', 'pandoc' },
+  filetypes = { 'javascript', 'javascriptreact', 'json', 'typescript', 'typescriptreact', 'css', 'less', 'scss', 'markdown', 'python' },
   init_options = {
     linters = {
       eslint = {
@@ -190,6 +191,7 @@ nvim_lsp.diagnosticls.setup {
       javascriptreact = 'eslint',
       typescript = 'eslint',
       typescriptreact = 'eslint',
+      python = { 'pylint', 'flake8' }
     },
     formatters = {
       prettier = {
@@ -226,6 +228,7 @@ nvim_lsp.diagnosticls.setup {
       typescriptreact = 'prettier',
       json = 'prettier',
       markdown = 'prettier',
+      python = 'black'
     }
   }
 }
