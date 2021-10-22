@@ -4,9 +4,9 @@ if (not status) then return end
 lualine.setup {
   options = {
     icons_enabled = true,
-    theme = 'nord',
-    section_separators = {'', ''},
-    component_separators = {'', ''},
+    theme = 'auto',
+    section_separators = { left = '', right = ''},
+    component_separators = { left= '', right = ''},
     disabled_filetypes = {}
   },
   sections = {

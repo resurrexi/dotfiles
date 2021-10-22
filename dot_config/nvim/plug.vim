@@ -7,8 +7,8 @@ call plug#begin()
 Plug 'airblade/vim-gitgutter'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-rhubarb'
-Plug 'arcticicestudio/nord-vim'
-Plug 'hoob3rt/lualine.nvim'
+Plug 'NLKNguyen/papercolor-theme'
+Plug 'nvim-lualine/lualine.nvim'
 Plug 'kristijanhusak/defx-git'
 Plug 'kristijanhusak/defx-icons'
 Plug 'Shougo/defx.nvim', { 'do': ':UpdateRemotePlugins' }

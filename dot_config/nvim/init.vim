@@ -97,16 +97,9 @@ runtime ./maps.vim
 " Syntax theme
 " ---------------------------------------------------------------------
 
-" true color
-if exists("&termguicolors") && exists("&winblend")
-  syntax enable
-  set termguicolors
-  set winblend=0
-  set wildoptions=pum
-  set pumblend=5
-  set background=dark
-  colorscheme nord
-endif
+set t_Co=256
+set background=dark
+colorscheme PaperColor
 
 " allow local project config
 set exrc
