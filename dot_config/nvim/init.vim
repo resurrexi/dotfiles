@@ -92,14 +92,6 @@ autocmd FileType yaml setlocal shiftwidth=2 tabstop=2
 " Imports
 " ---------------------------------------------------------------------
 runtime ./plug.vim
-if has("unix")
-  let s:uname = system("uname -s")
-  " Do Mac stuff
-  if s:uname == "Darwin\n"
-    runtime ./macos.vim
-  endif
-endif
-
 runtime ./maps.vim
 
 " Syntax theme
@@ -121,3 +113,5 @@ set exrc
 
 " run chezmoi apply whenever you save a dotfile
 autocmd BufWritePost ~/.local/share/chezmoi/* ! chezmoi apply --source-path %
+" trim trailing whitespace on save
+autocmd BufWritePre * :%s/\s\+$//e
