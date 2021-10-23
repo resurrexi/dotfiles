@@ -4,8 +4,13 @@ if !exists('g:loaded_defx') | finish | endif
 nnoremap <silent> <leader>f :Defx -listed -resume
       \ -columns=indent:mark:icon:icons:space:filename:git
       \ -ignored-files='.git*'
-      \ -buffer-name=tab`tabpagenr()`
-      \ `expand('%:p:h')` -search=`expand('%:p')`<CR>
+      \ -buffer-name=`'defx-' . tabpagenr()`
+      \ `escape(expand('%:p:h'), ' :\')` -search=`expand('%:p')`<CR>
+nnoremap <silent> <leader>dot :Defx
+      \ -columns=indent:mark:icon:icons:space:filename:git
+      \ -ignored-files='.git*'
+      \ -buffer-name='defx-dotfiles'
+      \ `escape(expand($XDG_DATA_HOME), ' :\') . '/chezmoi'`<CR>
 
 autocmd FileType defx call s:defx_my_settings()
 	function! s:defx_my_settings() abort
@@ -19,9 +24,9 @@ autocmd FileType defx call s:defx_my_settings()
 	  nnoremap <silent><buffer><expr> p
 	  \ defx#do_action('paste')
 	  nnoremap <silent><buffer><expr> l
-	  \ defx#do_action('open')
+	  \ defx#do_action('drop')
 	  nnoremap <silent><buffer><expr> <leader>l
-	  \ defx#do_action('open', 'vsplit')
+	  \ defx#do_action('drop', 'vsplit')
 	  nnoremap <silent><buffer><expr> o
 	  \ defx#do_action('open_or_close_tree')
 	  nnoremap <silent><buffer><expr> nd
