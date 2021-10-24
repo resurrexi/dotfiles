@@ -82,10 +82,13 @@ au BufNewFile,BufRead *.tsx setf typescriptreact
 au BufNewFile,BufRead *.md set filetype=markdown
 " Flow
 au BufNewFile,BufRead *.flow set filetype=javascript
+" chezmoi zshrc template
+au BufNewFile,BufRead dot_zshrc.tmpl setf zsh
 
 set suffixesadd+=.js,.es,.jsx,.json,.css,.less,.sass,.php,.py,.md
 
 autocmd FileType python setlocal shiftwidth=4 tabstop=4
+autocmd FileType zsh setlocal shiftwidth=4 tabstop=4
 
 " Imports
 " ---------------------------------------------------------------------

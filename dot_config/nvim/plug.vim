@@ -22,5 +22,6 @@ Plug 'nvim-lua/popup.nvim'
 Plug 'nvim-lua/plenary.nvim'
 Plug 'nvim-telescope/telescope.nvim'
 Plug 'windwp/nvim-autopairs'
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 
 call plug#end()
