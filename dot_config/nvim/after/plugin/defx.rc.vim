@@ -60,9 +60,11 @@ autocmd FileType defx call s:defx_my_settings()
       \ line('.') == line('$') ? 'gg' : 'j'
     nnoremap <silent><buffer><expr> k
       \ line('.') == 1 ? 'G' : 'k'
-    nnoremap <silent><buffer><expr> <C-l>
+    nnoremap <buffer><expr> <C-l>
       \ defx#do_action('redraw')
-    endfunction
+    nnoremap <buffer><expr> cd
+	    \ defx#do_action('change_vim_cwd')
+  endfunction
 
 call defx#custom#column('git', 'indicators', {
   \ 'Modified'  : 'M',

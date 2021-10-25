@@ -89,9 +89,13 @@ set suffixesadd+=.js,.es,.jsx,.json,.css,.less,.sass,.php,.py,.md
 
 autocmd FileType python setlocal shiftwidth=4 tabstop=4
 autocmd FileType zsh setlocal shiftwidth=4 tabstop=4
+autocmd FileType toml setlocal shiftwidth=4 tabstop=4
 
 " Imports
 " ---------------------------------------------------------------------
+" need to create prefix for fzf commands, https://github.com/junegunn/fzf.vim#commands
+let g:fzf_command_prefix = 'Fzf'
+
 runtime ./plug.vim
 runtime ./maps.vim
 
