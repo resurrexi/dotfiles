@@ -7,7 +7,7 @@ LICENSE
 
 {{ if ne .chezmoi.os "linux" -}}
 
-.config/alacritty/alacritty.yml
-.config/gtk-3.0/gtk.css
+.config/alacritty
+.config/gtk-3.0
 
 {{- end }}
