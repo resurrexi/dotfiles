@@ -4,3 +4,10 @@ LICENSE
 .oh-my-zsh/custom/plugins/poetry
 .oh-my-zsh/custom/themes/powerlevel10k/*.zwc
 .oh-my-zsh/custom/themes/powerlevel10k/*/*.zwc
+
+{{ if ne .chezmoi.os "linux" -}}
+
+.config/alacritty/alacritty.yaml
+.config/gtk-3.0/gtk.css
+
+{{- end }}
