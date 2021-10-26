@@ -4,13 +4,10 @@ lua << EOF
 local saga = require 'lspsaga'
 
 saga.init_lsp_saga {
-  error_sign = '',
-  warn_sign = '',
-  hint_sign = '',
-  infor_sign = '',
   border_style = "round",
+  -- get rid of annoying light bulb
+  code_action_prompt = { enable = false }
 }
-
 EOF
 
 nnoremap <silent> <C-j> <Cmd>Lspsaga diagnostic_jump_next<CR>

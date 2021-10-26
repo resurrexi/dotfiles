@@ -46,7 +46,11 @@ set nowrap "No Wrap lines
 set backspace=start,eol,indent
 " Finding files - Search down into subfolders
 set path+=**
-set wildignore+=*/node_modules/*
+set wildignore+=**/node_modules/*
+set wildignore+=**/.git/*
+set wildignore+=*.pyc
+set wildignore+=**/build/*
+set wildignore+=**/coverage/*
 
 " Turn off paste mode when leaving insert
 autocmd InsertLeave * set nopaste
@@ -106,19 +110,14 @@ set background=dark
 colorscheme PaperColor
 
 " transparent bg
-hi Normal guibg=none ctermbg=none
-hi LineNr guibg=none ctermbg=none
-hi Folded guibg=none ctermbg=none
-hi NonText guibg=none ctermbg=none
-hi SpecialKey guibg=none ctermbg=none
-hi VertSplit guibg=none ctermbg=none
-hi SignColumn guibg=none ctermbg=none
-hi EndOfBuffer guibg=none ctermbg=none
+autocmd SourcePost * hi Normal guibg=none ctermbg=none
+  \ | hi LineNr guibg=none ctermbg=none
+  \ | hi SignColumn guibg=none ctermbg=none
 
 " allow local project config
 set exrc
 
 " run chezmoi apply whenever you save a dotfile
-autocmd BufWritePost ~/.local/share/chezmoi/* ! chezmoi apply --verbose --source-path %
+autocmd BufWritePost ~/.local/share/chezmoi/* ! chezmoi apply --source-path %
 " trim trailing whitespace on save
 autocmd BufWritePre * :%s/\s\+$//e

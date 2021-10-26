@@ -15,7 +15,7 @@ local protocol = require'vim.lsp.protocol'
 -- import coq
 local coq = require'coq'
 
--- Use an on_attach function to only map the following keys 
+-- Use an on_attach function to only map the following keys
 -- after the language server attaches to the current buffer
 local on_attach = function(client, bufnr)
   local function buf_set_keymap(...) vim.api.nvim_buf_set_keymap(bufnr, ...) end
@@ -100,7 +100,7 @@ nvim_lsp.diagnosticls.setup {
     linters = {
       eslint = {
         command = './node_modules/.bin/eslint',
-        rootPatterns = { 
+        rootPatterns = {
           '.eslintrc.js',
           '.eslintrc.cjs',
           '.eslintrc.yaml',
@@ -237,12 +237,14 @@ nvim_lsp.diagnosticls.setup {
 vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
   vim.lsp.diagnostic.on_publish_diagnostics, {
     underline = true,
-    -- This sets the spacing and the prefix, obviously.
-    virtual_text = {
-      spacing = 4,
-      prefix = ''
-    }
+    -- turn off inline diagnostics
+    virtual_text = false
   }
 )
 
 EOF
+
+" transparent bg diagnostics
+hi LspDiagnosticsDefaultError ctermbg=none guibg=none
+hi LspDiagnosticsDefaultWarning ctermbg=none guibg=none
+
