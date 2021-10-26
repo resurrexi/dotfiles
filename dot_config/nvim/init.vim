@@ -119,6 +119,6 @@ hi EndOfBuffer guibg=none ctermbg=none
 set exrc
 
 " run chezmoi apply whenever you save a dotfile
-autocmd BufWritePost ~/.local/share/chezmoi/* ! chezmoi apply --source-path %
+autocmd BufWritePost ~/.local/share/chezmoi/* ! chezmoi apply --verbose --source-path %
 " trim trailing whitespace on save
 autocmd BufWritePre * :%s/\s\+$//e
