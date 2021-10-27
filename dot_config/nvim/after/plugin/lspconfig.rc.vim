@@ -204,7 +204,9 @@ vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
   vim.lsp.diagnostic.on_publish_diagnostics, {
     underline = true,
     -- turn off inline diagnostics
-    virtual_text = false
+    virtual_text = false,
+    -- update diagnostics while in insert mode
+    update_in_insert = true
   }
 )
 
