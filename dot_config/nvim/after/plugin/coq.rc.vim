@@ -4,7 +4,9 @@ local npairs = require('nvim-autopairs')
 
 npairs.setup({ map_bs = false })
 
-vim.g.coq_settings = { keymap = { recommended = false } }
+vim.g.coq_settings = {
+  keymap = { recommended = false },
+}
 
 -- these mappings are coq recommended mappings unrelated to nvim-autopairs
 remap('i', '<esc>', [[pumvisible() ? "<c-e><esc>" : "<esc>"]], { expr = true, noremap = true })
@@ -37,3 +39,6 @@ MUtils.BS = function()
 end
 remap('i', '<bs>', 'v:lua.MUtils.BS()', { expr = true, noremap = true })
 EOF
+
+" auto start COQ
+autocmd VimEnter * COQnow -s

@@ -35,3 +35,5 @@ noremap <C-w><C-down> <C-w>-
 " clear highlighted text
 nnoremap <Esc><Esc> :noh<CR>
 
+" get out of terminal input
+tnoremap <Esc><Esc><Esc> <C-\><C-n>

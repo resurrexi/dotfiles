@@ -13,7 +13,6 @@ Plug 'kristijanhusak/defx-git'
 Plug 'kristijanhusak/defx-icons'
 Plug 'Shougo/defx.nvim', { 'do': ':UpdateRemotePlugins' }
 Plug 'neovim/nvim-lspconfig'
-Plug 'glepnir/lspsaga.nvim'
 Plug 'folke/lsp-colors.nvim'
 Plug 'ms-jpq/coq_nvim', {'branch': 'coq'}
 Plug 'nvim-treesitter/nvim-treesitter', { 'do': ':TSUpdate' }

@@ -2,18 +2,13 @@ if !exists('g:lspconfig')
   finish
 endif
 
-let g:coq_settings = { 'auto_start': v:true }
-
 lua << EOF
 --vim.lsp.set_log_level("debug")
 EOF
 
 lua << EOF
-local nvim_lsp = require'lspconfig'
-local protocol = require'vim.lsp.protocol'
-
--- import coq
-local coq = require'coq'
+local nvim_lsp = require('lspconfig')
+local coq = require('coq')
 
 -- Use an on_attach function to only map the following keys
 -- after the language server attaches to the current buffer
@@ -30,21 +25,21 @@ local on_attach = function(client, bufnr)
   -- See `:help vim.lsp.*` for documentation on any of the below functions
   buf_set_keymap('n', 'gD', '<Cmd>lua vim.lsp.buf.declaration()<CR>', opts)
   buf_set_keymap('n', 'gd', '<Cmd>lua vim.lsp.buf.definition()<CR>', opts)
-  --buf_set_keymap('n', 'K', '<Cmd>lua vim.lsp.buf.hover()<CR>', opts)
+  buf_set_keymap('n', 'K', '<Cmd>lua vim.lsp.buf.hover()<CR>', opts)
   buf_set_keymap('n', 'gi', '<cmd>lua vim.lsp.buf.implementation()<CR>', opts)
-  --buf_set_keymap('i', '<C-k>', '<cmd>lua vim.lsp.buf.signature_help()<CR>', opts)
-  buf_set_keymap('n', '<space>wa', '<cmd>lua vim.lsp.buf.add_workspace_folder()<CR>', opts)
-  buf_set_keymap('n', '<space>wr', '<cmd>lua vim.lsp.buf.remove_workspace_folder()<CR>', opts)
-  buf_set_keymap('n', '<space>wl', '<cmd>lua print(vim.inspect(vim.lsp.buf.list_workspace_folders()))<CR>', opts)
+  buf_set_keymap('i', '<C-k>', '<cmd>lua vim.lsp.buf.signature_help()<CR>', opts)
+  --buf_set_keymap('n', '<space>wa', '<cmd>lua vim.lsp.buf.add_workspace_folder()<CR>', opts)
+  --buf_set_keymap('n', '<space>wr', '<cmd>lua vim.lsp.buf.remove_workspace_folder()<CR>', opts)
+  --buf_set_keymap('n', '<space>wl', '<cmd>lua print(vim.inspect(vim.lsp.buf.list_workspace_folders()))<CR>', opts)
   buf_set_keymap('n', '<space>D', '<cmd>lua vim.lsp.buf.type_definition()<CR>', opts)
   buf_set_keymap('n', '<space>rn', '<cmd>lua vim.lsp.buf.rename()<CR>', opts)
   buf_set_keymap('n', '<space>ca', '<cmd>lua vim.lsp.buf.code_action()<CR>', opts)
   buf_set_keymap('n', 'gr', '<cmd>lua vim.lsp.buf.references()<CR>', opts)
-  buf_set_keymap('n', '<space>e', '<cmd>lua vim.lsp.diagnostic.show_line_diagnostics()<CR>', opts)
-  --buf_set_keymap('n', '<C-j>', '<cmd>lua vim.lsp.diagnostic.goto_prev()<CR>', opts)
-  --buf_set_keymap('n', '<S-C-j>', '<cmd>lua vim.lsp.diagnostic.goto_next()<CR>', opts)
-  buf_set_keymap('n', '<space>q', '<cmd>lua vim.lsp.diagnostic.set_loclist()<CR>', opts)
-  buf_set_keymap("n", "<space>f", "<cmd>lua vim.lsp.buf.formatting()<CR>", opts)
+  --buf_set_keymap('n', '<space>e', '<cmd>lua vim.lsp.diagnostic.show_line_diagnostics()<CR>', opts)
+  buf_set_keymap('n', '<C-j>', '<cmd>lua vim.lsp.diagnostic.goto_prev()<CR>', opts)
+  buf_set_keymap('n', '<S-C-j>', '<cmd>lua vim.lsp.diagnostic.goto_next()<CR>', opts)
+  --buf_set_keymap('n', '<space>q', '<cmd>lua vim.lsp.diagnostic.set_loclist()<CR>', opts)
+  --buf_set_keymap("n", "<space>f", "<cmd>lua vim.lsp.buf.formatting()<CR>", opts)
 
   -- formatting
   if client.resolved_capabilities.document_formatting then
@@ -53,35 +48,6 @@ local on_attach = function(client, bufnr)
     vim.api.nvim_command [[autocmd BufWritePre <buffer> lua vim.lsp.buf.formatting_seq_sync()]]
     vim.api.nvim_command [[augroup END]]
   end
-
-  --protocol.SymbolKind = { }
-  protocol.CompletionItemKind = {
-    '', -- Text
-    '', -- Method
-    '', -- Function
-    '', -- Constructor
-    '', -- Field
-    '', -- Variable
-    '', -- Class
-    'ﰮ', -- Interface
-    '', -- Module
-    '', -- Property
-    '', -- Unit
-    '', -- Value
-    '', -- Enum
-    '', -- Keyword
-    '﬌', -- Snippet
-    '', -- Color
-    '', -- File
-    '', -- Reference
-    '', -- Folder
-    '', -- EnumMember
-    '', -- Constant
-    '', -- Struct
-    '', -- Event
-    'ﬦ', -- Operator
-    '', -- TypeParameter
-  }
 end
 
 nvim_lsp.tsserver.setup(coq.lsp_ensure_capabilities({
@@ -233,7 +199,7 @@ nvim_lsp.diagnosticls.setup {
   }
 }
 
--- icon
+-- customize diagnostics
 vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
   vim.lsp.diagnostic.on_publish_diagnostics, {
     underline = true,
@@ -242,9 +208,59 @@ vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
   }
 )
 
+-- change diagnostic symbols
+local signs = { Error = "■", Warning = "■", Hint = "■", Information = "■" }
+
+for type, icon in pairs(signs) do
+  local hl = "LspDiagnosticsSign" .. type
+  vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = hl })
+end
+
+-- completion kinds
+-- this needs to be at the end since it returns M
+local M = {}
+
+M.icons = {
+  Class = "",
+  Color = "",
+  Constant = "",
+  Constructor = "",
+  Enum = "",
+  EnumMember = "",
+  Event = "",
+  Field = "",
+  File = "",
+  Folder = "",
+  Function = "",
+  Interface = "ﰮ",
+  Keyword = "",
+  Method = "",
+  Module = "",
+  Operator = " ",
+  Property = "",
+  Reference = '',
+  Snippet = "﬌",
+  Struct = "",
+  Text = "",
+  TypeParameter = "",
+  Unit = "",
+  Value = "",
+  Variable = "",
+}
+
+function M.setup()
+  local kinds = vim.lsp.protocol.CompletionItemKind
+  for i, kind in ipairs(kinds) do
+    kinds[i] = M.icons[kind] or kind
+  end
+end
+
+return M
+
 EOF
 
 " transparent bg diagnostics
 hi LspDiagnosticsDefaultError ctermbg=none guibg=none
 hi LspDiagnosticsDefaultWarning ctermbg=none guibg=none
-
+hi LspDiagnosticsDefaultInformation ctermbg=none guibg=none
+hi LspDiagnosticsDefaultHint ctermbg=none guibg=none
