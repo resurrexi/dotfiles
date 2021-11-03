@@ -19,6 +19,7 @@ lualine.setup {
     }},
     lualine_x = {
       { 'diagnostics', sources = {"nvim_lsp"}, symbols = {error = ' ', warn = ' ', info = ' ', hint = ' '} },
+      'b:gitsigns_status',
       'encoding',
       'filetype'
     },
@@ -38,5 +39,5 @@ lualine.setup {
     lualine_z = {}
   },
   tabline = {},
-  extensions = {'fugitive'}
+  extensions = {}
 }

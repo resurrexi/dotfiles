@@ -13,13 +13,13 @@ autocmd! FileType fzf set laststatus=0 noshowmode noruler
 
 
 " Mapping selecting mappings
-nmap <leader><Tab> <Plug>(fzf-maps-n)
-xmap <leader><Tab> <Plug>(fzf-maps-x)
-omap <leader><Tab> <Plug>(fzf-maps-o)
+nmap <leader>z <Plug>(fzf-maps-n)
+xmap <leader>z <Plug>(fzf-maps-x)
+omap <leader>z <Plug>(fzf-maps-o)
 
 " Insert mode completion
-inoremap <expr> <C-f><C-f> fzf#vim#complete#path('fd --hidden --exclude .git')
-imap <C-f><C-l> <Plug>(fzf-complete-buffer-line)
+inoremap <expr> <C-z><C-f> fzf#vim#complete#path('fd --hidden --exclude .git')
+imap <C-z><C-l> <Plug>(fzf-complete-buffer-line)
 
 " Additional custom mappings
 nnoremap <silent> <leader>o :FzfFiles<CR>
