@@ -143,7 +143,7 @@ export XDG_DATA_HOME=${XDG_DATA_HOME:-$HOME/.local/share}
 
 # custom fzf config
 export FZF_DEFAULT_COMMAND="fd --type f --follow --hidden --exclude .git --exclude node_modules"
-export FZF_DEFAULT_OPTS="--no-mouse --height 40% --reverse --info inline --preview='[[ \$(file --mime {}) =~ binary ]] && echo {} is a binary || (bat --style=numbers --color=always --line-range :500 {} || cat {}) 2> /dev/null | head -n 500' --preview-window='right:hidden:wrap' --bind='f2:toggle-preview,f3:refresh-preview'"
+export FZF_DEFAULT_OPTS="--no-mouse --height 40% --reverse --info inline --preview='[[ \$(file --mime {}) =~ binary ]] && echo {} is a binary || (bat --style=numbers --color=always --line-range :500 {} || cat {}) 2> /dev/null | head -n 500' --preview-window='right:hidden:wrap' --bind='?:toggle-preview,f2:refresh-preview,ctrl-j:preview-down,ctrl-k:preview-up'"
 export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
 
 # bat config
@@ -159,6 +159,9 @@ zstyle ':completion:*:descriptions' format '[%d]'
 zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
 # preview directory's content with exa when completing cd
 zstyle ':fzf-tab:complete:cd:*' fzf-preview 'exa -1 --color=always $realpath'
+# preview files with bat
+zstyle ':fzf-tab:complete:*:*' fzf-preview \
+    '[[ $(file --mime $realpath) =~ binary ]] && echo $realpath is a binary || (bat --style=numbers --color=always --line-range :500 $realpath || cat $realpath) 2> /dev/null | head -n 500'
 # switch group using `,` and `.`
 zstyle ':fzf-tab:*' switch-group ',' '.'
 
