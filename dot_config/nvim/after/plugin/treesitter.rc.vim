@@ -10,7 +10,7 @@ require'nvim-treesitter.configs'.setup {
     disable = {},
   },
   indent = {
-    enable = false,
+    enable = true,
     disable = {},
   },
   -- enable autotag for nvim-ts-autotag plugin
