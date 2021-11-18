@@ -18,5 +18,6 @@ Plug 'windwp/nvim-ts-autotag'
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
 Plug 'luukvbaal/nnn.nvim'
+Plug 'norcalli/nvim-colorizer.lua'
 
 call plug#end()

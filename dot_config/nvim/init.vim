@@ -26,6 +26,7 @@ set splitbelow
 set shell=zsh
 set scrolloff=10
 set updatetime=300
+set termguicolors
 
 " incremental substitution (neovim)
 if has('nvim')
