@@ -13,6 +13,10 @@ require'nvim-treesitter.configs'.setup {
     enable = false,
     disable = {},
   },
+  -- enable autotag for nvim-ts-autotag plugin
+  autotag = {
+    enable = true,
+  },
   ensure_installed = {
     "javascript",
     "typescript",
