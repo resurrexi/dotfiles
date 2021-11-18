@@ -27,6 +27,7 @@ set shell=zsh
 set scrolloff=10
 set updatetime=300
 set termguicolors
+set completeopt=menu,menuone,noselect
 
 " incremental substitution (neovim)
 if has('nvim')

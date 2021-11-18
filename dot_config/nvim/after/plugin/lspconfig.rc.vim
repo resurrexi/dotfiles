@@ -8,7 +8,6 @@ EOF
 
 lua << EOF
 local nvim_lsp = require('lspconfig')
-local coq = require('coq')
 
 -- Use an on_attach function to only map the following keys
 -- after the language server attaches to the current buffer
@@ -50,13 +49,16 @@ local on_attach = function(client, bufnr)
   end
 end
 
-nvim_lsp.tsserver.setup(coq.lsp_ensure_capabilities({
-  on_attach = on_attach
-}))
-
-nvim_lsp.pyright.setup(coq.lsp_ensure_capabilities({
-  on_attach = on_attach
-}))
+-- bind nvim-cmp to lsp servers
+local capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
+nvim_lsp.tsserver.setup {
+  on_attach = on_attach,
+  capabilities = capabilities
+}
+nvim_lsp.pyright.setup {
+  on_attach = on_attach,
+  capabilities = capabilities
+}
 
 -- https://github.com/iamcco/coc-diagnostic/blob/master/src/config.ts
 nvim_lsp.diagnosticls.setup {
@@ -217,48 +219,6 @@ for type, icon in pairs(signs) do
   local hl = "LspDiagnosticsSign" .. type
   vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = hl })
 end
-
--- completion kinds
--- this needs to be at the end since it returns M
-local M = {}
-
-M.icons = {
-  Class = "",
-  Color = "",
-  Constant = "",
-  Constructor = "",
-  Enum = "",
-  EnumMember = "",
-  Event = "",
-  Field = "",
-  File = "",
-  Folder = "",
-  Function = "",
-  Interface = "ﰮ",
-  Keyword = "",
-  Method = "",
-  Module = "",
-  Operator = " ",
-  Property = "",
-  Reference = '',
-  Snippet = "﬌",
-  Struct = "",
-  Text = "",
-  TypeParameter = "",
-  Unit = "",
-  Value = "",
-  Variable = "",
-}
-
-function M.setup()
-  local kinds = vim.lsp.protocol.CompletionItemKind
-  for i, kind in ipairs(kinds) do
-    kinds[i] = M.icons[kind] or kind
-  end
-end
-
-return M
-
 EOF
 
 " transparent bg diagnostics
