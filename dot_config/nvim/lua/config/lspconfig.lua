@@ -1,67 +1,84 @@
-if !exists('g:lspconfig')
-  finish
-endif
+local nvim_lsp = require("lspconfig")
+local cmp_capabilities = require("cmp_nvim_lsp").update_capabilities(vim.lsp.protocol.make_client_capabilities())
 
-lua << EOF
---vim.lsp.set_log_level("debug")
-EOF
+-- Change diagnostic symbols
+local signs = { Error = "■", Warning = "■", Hint = "■", Information = "■" }
 
-lua << EOF
-local nvim_lsp = require('lspconfig')
+for type, icon in pairs(signs) do
+  local hl = "LspDiagnosticsSign" .. type
+  vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = hl })
+end
 
--- Use an on_attach function to only map the following keys
--- after the language server attaches to the current buffer
+-- Transparent bg on diagnostics
+vim.cmd([[
+augroup DiagnosticColors
+autocmd!
+autocmd ColorScheme * highlight LspDiagnosticsDefaultError ctermbg=none guibg=none
+autocmd ColorScheme * highlight LspDiagnosticsDefaultWarning ctermbg=none guibg=none
+autocmd ColorScheme * highlight LspDiagnosticsDefaultInformation ctermbg=none guibg=none
+autocmd ColorScheme * highlight LspDiagnosticsDefaultHint ctermbg=none guibg=none
+augroup
+]])
+
+-- Customize diagnostics
+vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
+  vim.lsp.diagnostic.on_publish_diagnostics, {
+    underline = true,
+    virtual_text = false,
+    update_in_insert = true
+  }
+)
+
+-- Setup attach method for each buffer
 local on_attach = function(client, bufnr)
-  local function buf_set_keymap(...) vim.api.nvim_buf_set_keymap(bufnr, ...) end
+  local lsp_mapper = function(mode, key, result)
+    vim.api.nvim_buf_set_keymap(
+      bufnr,
+      mode,
+      key,
+      "<Cmd>lua " .. result .. "<CR>",
+      { noremap = true, silent = true }
+    )
+  end
   local function buf_set_option(...) vim.api.nvim_buf_set_option(bufnr, ...) end
 
-  --Enable completion triggered by <c-x><c-o>
-  buf_set_option('omnifunc', 'v:lua.vim.lsp.omnifunc')
-
-  -- Mappings.
-  local opts = { noremap=true, silent=true }
+  buf_set_option("omnifunc", "v:lua.vim.lsp.omnifunc")
 
   -- See `:help vim.lsp.*` for documentation on any of the below functions
-  buf_set_keymap('n', 'gD', '<Cmd>lua vim.lsp.buf.declaration()<CR>', opts)
-  buf_set_keymap('n', 'gd', '<Cmd>lua vim.lsp.buf.definition()<CR>', opts)
-  buf_set_keymap('n', 'K', '<Cmd>lua vim.lsp.buf.hover()<CR>', opts)
-  buf_set_keymap('n', 'gi', '<cmd>lua vim.lsp.buf.implementation()<CR>', opts)
-  buf_set_keymap('i', '<C-k>', '<cmd>lua vim.lsp.buf.signature_help()<CR>', opts)
-  --buf_set_keymap('n', '<space>wa', '<cmd>lua vim.lsp.buf.add_workspace_folder()<CR>', opts)
-  --buf_set_keymap('n', '<space>wr', '<cmd>lua vim.lsp.buf.remove_workspace_folder()<CR>', opts)
-  --buf_set_keymap('n', '<space>wl', '<cmd>lua print(vim.inspect(vim.lsp.buf.list_workspace_folders()))<CR>', opts)
-  buf_set_keymap('n', '<space>D', '<cmd>lua vim.lsp.buf.type_definition()<CR>', opts)
-  buf_set_keymap('n', '<space>rn', '<cmd>lua vim.lsp.buf.rename()<CR>', opts)
-  buf_set_keymap('n', '<space>ca', '<cmd>lua vim.lsp.buf.code_action()<CR>', opts)
-  buf_set_keymap('n', 'gr', '<cmd>lua vim.lsp.buf.references()<CR>', opts)
-  --buf_set_keymap('n', '<space>e', '<cmd>lua vim.lsp.diagnostic.show_line_diagnostics()<CR>', opts)
-  buf_set_keymap('n', '<C-j>', '<cmd>lua vim.lsp.diagnostic.goto_prev()<CR>', opts)
-  buf_set_keymap('n', '<S-C-j>', '<cmd>lua vim.lsp.diagnostic.goto_next()<CR>', opts)
-  --buf_set_keymap('n', '<space>q', '<cmd>lua vim.lsp.diagnostic.set_loclist()<CR>', opts)
-  --buf_set_keymap("n", "<space>f", "<cmd>lua vim.lsp.buf.formatting()<CR>", opts)
+  lsp_mapper("n", "K", "vim.lsp.buf.hover()")
+  lsp_mapper("n", "gd", "vim.lsp.buf.definition()")
+  lsp_mapper("n", "gr", "vim.lsp.buf.references()")
+  lsp_mapper("n", "gt", "vim.lsp.buf.type_definition()")
+  lsp_mapper("n", "<leader>rn", "vim.lsp.buf.rename()")
+  lsp_mapper("n", "<leader>ca", "vim.lsp.buf.code_action()")
+  lsp_mapper("n", "<C-j>", "vim.lsp.diagnostic.goto_next()")
+  lsp_mapper("n", "<S-C-j>", "vim.lsp.diagnostic.goto_prev()")
+  lsp_mapper("i", "<C-k>", "vim.lsp.buf.signature_help()")
 
-  -- formatting
+  -- Auto-format on save
   if client.resolved_capabilities.document_formatting then
-    vim.api.nvim_command [[augroup Format]]
-    vim.api.nvim_command [[autocmd! * <buffer>]]
-    vim.api.nvim_command [[autocmd BufWritePre <buffer> lua vim.lsp.buf.formatting_seq_sync()]]
-    vim.api.nvim_command [[augroup END]]
+    vim.cmd([[
+    augroup Format
+    autocmd! * <buffer>
+    autocmd BufWritePre <buffer> lua vim.lsp.buf.formatting_seq_sync()
+    augroup end
+    ]])
   end
 end
 
--- bind nvim-cmp to lsp servers
-local capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
-nvim_lsp.tsserver.setup {
+-- LSP servers
+nvim_lsp.tsserver.setup({
   on_attach = on_attach,
-  capabilities = capabilities
-}
-nvim_lsp.pyright.setup {
+  capabilities = cmp_capabilities
+})
+nvim_lsp.pyright.setup({
   on_attach = on_attach,
-  capabilities = capabilities
-}
+  capabilities = cmp_capabilities
+})
 
+-- Setup diagnostic clients
 -- https://github.com/iamcco/coc-diagnostic/blob/master/src/config.ts
-nvim_lsp.diagnosticls.setup {
+nvim_lsp.diagnosticls.setup({
   on_attach = on_attach,
   filetypes = { 'javascript', 'javascriptreact', 'json', 'typescript', 'typescriptreact', 'css', 'less', 'scss', 'markdown', 'python' },
   init_options = {
@@ -199,30 +216,4 @@ nvim_lsp.diagnosticls.setup {
       python = 'black'
     }
   }
-}
-
--- customize diagnostics
-vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
-  vim.lsp.diagnostic.on_publish_diagnostics, {
-    underline = true,
-    -- turn off inline diagnostics
-    virtual_text = false,
-    -- update diagnostics while in insert mode
-    update_in_insert = true
-  }
-)
-
--- change diagnostic symbols
-local signs = { Error = "■", Warning = "■", Hint = "■", Information = "■" }
-
-for type, icon in pairs(signs) do
-  local hl = "LspDiagnosticsSign" .. type
-  vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = hl })
-end
-EOF
-
-" transparent bg diagnostics
-hi LspDiagnosticsDefaultError ctermbg=none guibg=none
-hi LspDiagnosticsDefaultWarning ctermbg=none guibg=none
-hi LspDiagnosticsDefaultInformation ctermbg=none guibg=none
-hi LspDiagnosticsDefaultHint ctermbg=none guibg=none
+})
