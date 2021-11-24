@@ -1,9 +1,5 @@
 require("fzf-lua").setup({
-  winops = {
-    preview = {
-      hidden = "hidden"
-    }
-  },
+  preview_opts = "hidden",
   keymap = {
     builtin = {
       ["?"] = "toggle-preview",
