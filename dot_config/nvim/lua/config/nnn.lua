@@ -10,7 +10,7 @@ require("nnn").setup({
   },
   mappings = {
     {"<C-t>", builtin.open_in_tab},
-    {"<C-x>", builtin.open_in_split},
+    {"<C-s>", builtin.open_in_split},
     {"<C-v>", builtin.open_in_vsplit}
   }
 })

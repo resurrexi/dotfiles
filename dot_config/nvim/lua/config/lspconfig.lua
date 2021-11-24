@@ -12,11 +12,11 @@ end
 -- Transparent bg on diagnostics
 vim.cmd([[
 augroup DiagnosticColors
-autocmd!
-autocmd ColorScheme * highlight LspDiagnosticsDefaultError ctermbg=none guibg=none
-autocmd ColorScheme * highlight LspDiagnosticsDefaultWarning ctermbg=none guibg=none
-autocmd ColorScheme * highlight LspDiagnosticsDefaultInformation ctermbg=none guibg=none
-autocmd ColorScheme * highlight LspDiagnosticsDefaultHint ctermbg=none guibg=none
+au!
+au ColorScheme * hi LspDiagnosticsDefaultError ctermbg=none guibg=none
+au ColorScheme * hi LspDiagnosticsDefaultWarning ctermbg=none guibg=none
+au ColorScheme * hi LspDiagnosticsDefaultInformation ctermbg=none guibg=none
+au ColorScheme * hi LspDiagnosticsDefaultHint ctermbg=none guibg=none
 augroup
 ]])
 
@@ -48,7 +48,7 @@ local on_attach = function(client, bufnr)
   lsp_mapper("n", "K", "vim.lsp.buf.hover()")
   lsp_mapper("n", "gd", "vim.lsp.buf.definition()")
   lsp_mapper("n", "gr", "vim.lsp.buf.references()")
-  lsp_mapper("n", "gt", "vim.lsp.buf.type_definition()")
+  lsp_mapper("n", "gn", "vim.lsp.buf.type_definition()")
   lsp_mapper("n", "<leader>rn", "vim.lsp.buf.rename()")
   lsp_mapper("n", "<leader>ca", "vim.lsp.buf.code_action()")
   lsp_mapper("n", "<C-j>", "vim.lsp.diagnostic.goto_next()")
