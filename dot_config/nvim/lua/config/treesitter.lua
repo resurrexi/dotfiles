@@ -8,5 +8,22 @@ require("nvim-treesitter.configs").setup({
   autotag = {
     enable = true
   },
-  ensure_installed = "maintained" -- or "all", or a list
+  -- "all", "maintained", or a list
+  ensure_installed = {
+    "bash",
+    "css",
+    "dockerfile",
+    "html",
+    "javascript",
+    "json",
+    "latex",
+    "lua",
+    "python",
+    "scss",
+    "toml",
+    "tsx",
+    "typescript",
+    "vim",
+    "yaml"
+  }
 })
