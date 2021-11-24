@@ -15,11 +15,7 @@ packer.startup(
     use "wbthomason/packer.nvim"
 
     -- LSP and friends
-    use {
-      "neovim/nvim-lspconfig",
-      requires = {"hrsh7th/cmp-nvim-lsp"},
-      config = [[require("config.lspconfig")]]
-    }
+    use "neovim/nvim-lspconfig"
     use {
       "nvim-treesitter/nvim-treesitter",
       run = ":TSUpdate",
@@ -29,6 +25,7 @@ packer.startup(
     -- Essentials
     use {
       "windwp/nvim-autopairs",
+      event = "InsertEnter",
       config = function()
         require("nvim-autopairs").setup({
           disable_filetype = {"TelescopePrompt"}
@@ -37,7 +34,8 @@ packer.startup(
     }
     use {
       "windwp/nvim-ts-autotag",
-      requires = {"nvim-treesitter/nvim-treesitter"}
+      event = "InsertEnter",
+      after = "nvim-treesitter"
     }
     use {
       "b3nj5m1n/kommentary",
@@ -59,9 +57,9 @@ packer.startup(
     }
     use {
       "ibhagwan/fzf-lua",
+      after = "nvim-web-devicons",
       requires = {
-        "vijaymarupudi/nvim-fzf",
-        "kyazdani42/nvim-web-devicons"
+        {"vijaymarupudi/nvim-fzf", after = "fzf"},
       },
       config = [[require("config.fzf")]]
     }
@@ -71,12 +69,11 @@ packer.startup(
       "hrsh7th/nvim-cmp",
       requires = {
         "onsails/lspkind-nvim",
-        "L3MON4D3/LuaSnip",
-        "hrsh7th/cmp-nvim-lsp",
-        {"hrsh7th/cmp-buffer", after = "nvim-cmp"},
-        {"hrsh7th/cmp-path", after = "nvim-cmp"},
-        {"hrsh7th/cmp-cmdline", after = "nvim-cmp"},
-        {"saadparwaiz1/cmp_luasnip", after = "nvim-cmp"},
+        "hrsh7th/cmp-buffer",
+        "hrsh7th/cmp-path",
+        "hrsh7th/cmp-cmdline",
+        {"hrsh7th/cmp-nvim-lsp", after = "nvim-lspconfig"},
+        {"saadparwaiz1/cmp_luasnip", requires = "L3MON4D3/LuaSnip"},
       },
       config = [[require("config.cmp")]]
     }
@@ -90,10 +87,13 @@ packer.startup(
         })
       end
     }
-    use "folke/lsp-colors.nvim"
+    use {
+      "folke/lsp-colors.nvim",
+      after = "nvim-lspconfig"
+    }
     use {
       "nvim-lualine/lualine.nvim",
-      requires = {"kyazdani42/nvim-web-devicons"},
+      after = "nvim-web-devicons",
       config = [[require("config.lualine")]]
     }
     use {

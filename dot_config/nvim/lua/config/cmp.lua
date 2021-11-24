@@ -24,7 +24,7 @@ cmp.setup({
   sources = {
     {name = "nvim_lsp", max_item_count = 20}, -- tsserver likes to send back everything
     {name = "luasnip"},
-    {name = "buffer", opts = {
+    {name = "buffer", options = {
       get_bufnrs = function()
         return vim.api.nvim_list_bufs()
       end
