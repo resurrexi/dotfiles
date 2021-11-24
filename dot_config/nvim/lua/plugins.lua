@@ -15,7 +15,10 @@ packer.startup(
     use "wbthomason/packer.nvim"
 
     -- LSP and friends
-    use "neovim/nvim-lspconfig"
+    use {
+      "neovim/nvim-lspconfig",
+      config = [[require("config.lspconfig")]]
+    }
     use {
       "nvim-treesitter/nvim-treesitter",
       run = ":TSUpdate",
@@ -59,7 +62,7 @@ packer.startup(
       "ibhagwan/fzf-lua",
       after = "nvim-web-devicons",
       requires = {
-        {"vijaymarupudi/nvim-fzf", after = "fzf"},
+        "vijaymarupudi/nvim-fzf",
       },
       config = [[require("config.fzf")]]
     }
@@ -67,13 +70,14 @@ packer.startup(
     -- Completion
     use {
       "hrsh7th/nvim-cmp",
+      after = "nvim-lspconfig",
       requires = {
         "onsails/lspkind-nvim",
-        "hrsh7th/cmp-buffer",
-        "hrsh7th/cmp-path",
-        "hrsh7th/cmp-cmdline",
-        {"hrsh7th/cmp-nvim-lsp", after = "nvim-lspconfig"},
-        {"saadparwaiz1/cmp_luasnip", requires = "L3MON4D3/LuaSnip"},
+        "hrsh7th/cmp-nvim-lsp",
+        {"hrsh7th/cmp-buffer", after = "nvim-cmp"},
+        {"hrsh7th/cmp-path", after = "nvim-cmp"},
+        {"hrsh7th/cmp-cmdline", after = "nvim-cmp"},
+        {"saadparwaiz1/cmp_luasnip", after = "nvim-cmp", requires = "L3MON4D3/LuaSnip"},
       },
       config = [[require("config.cmp")]]
     }

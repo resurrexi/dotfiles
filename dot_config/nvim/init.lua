@@ -1,3 +1,6 @@
+-- Disable shada file (optimization)
+vim.opt.shadafile = "NONE"
+
 -- Essentials
 vim.g.mapleader = ","
 vim.g.builtin_lsp = true
@@ -48,5 +51,33 @@ vim.opt.smartcase = true
 vim.opt.hlsearch = true
 vim.opt.incsearch = true
 
+-- Optimizations
+local disabled_built_ins = {
+  "netrw",
+  "netrwPlugin",
+  "netrwSettings",
+  "netrwFileHandlers",
+  "gzip",
+  "zip",
+  "zipPlugin",
+  "tar",
+  "tarPlugin",
+  "getscript",
+  "getscriptPlugin",
+  "vimball",
+  "vimballPlugin",
+  "2html_plugin",
+  "logipat",
+  "rrhelper",
+  "spellfile_plugin"
+}
+for _, plugin in pairs(disabled_built_ins) do
+  vim.g["loaded_" .. plugin] = 1
+end
+
+-- Load lua files
 require("plugins")
 require("mappings")
+
+-- Re-enable shadafile
+vim.opt.shadafile = ""
