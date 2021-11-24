@@ -9,5 +9,6 @@ LICENSE
 
 .config/alacritty
 .config/gtk-3.0
+.config/tilix
 
 {{- end }}

@@ -1,0 +1,32 @@
+{
+  "name": "Github Dark",
+  "background-color": "#24292e",
+  "foreground-color": "#d1d5da",
+  "use-theme-colors": false,
+  "use-highlight-color": true,
+  "highlight-background-color": "#284566",
+  "highlight-foreground-color": "#d1d5da",
+  "use-cursor-color": false,
+  "cursor-background-color": "#24292e",
+  "cursor-foreground-color": "#c8e1ff",
+  "use-badge-color": true,
+  "badge-color": "#444c56",
+  "palette": [
+      "#24292e",
+      "#f14c4c",
+      "#23d18b",
+      "#e2e210",
+      "#3b8eea",
+      "#bc3fbc",
+      "#29b7da",
+      "#666666",
+      "#666666",
+      "#f14c4c",
+      "#23d18b",
+      "#f5f543",
+      "#3b8eea",
+      "#d670d6",
+      "#29b8db",
+      "#d1d5da"
+  ]
+}
