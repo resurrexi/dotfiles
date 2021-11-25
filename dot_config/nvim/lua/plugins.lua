@@ -28,6 +28,7 @@ packer.startup(
     -- Essentials
     use {
       "windwp/nvim-autopairs",
+      event = "InsertEnter",
       config = function()
         require("nvim-autopairs").setup({
           disable_filetype = {"TelescopePrompt"}
@@ -36,12 +37,14 @@ packer.startup(
     }
     use {
       "windwp/nvim-ts-autotag",
+      event = "BufAdd", -- doesn't work with InsertEnter
       config = function()
         require("nvim-ts-autotag").setup()
       end
     }
     use {
       "b3nj5m1n/kommentary",
+      event = "BufAdd",
       config = function()
         require("kommentary.config").configure_language("default", {
           prefer_single_line_comments = true,
@@ -52,6 +55,7 @@ packer.startup(
     }
     use {
       "luukvbaal/nnn.nvim",
+      event = "VimEnter",
       config = [[require("config.nnn")]]
     }
     use {
@@ -60,6 +64,7 @@ packer.startup(
     }
     use {
       "ibhagwan/fzf-lua",
+      event = "VimEnter",
       after = "nvim-web-devicons",
       requires = {
         "vijaymarupudi/nvim-fzf",
@@ -70,7 +75,10 @@ packer.startup(
     -- Completion
     use {
       "hrsh7th/nvim-cmp",
-      event = "InsertEnter",
+      event = {
+        "InsertEnter",
+        "CmdlineEnter" -- to allow loading for cmdline after startup
+      },
       after = "nvim-lspconfig",
       requires = {
         "onsails/lspkind-nvim",
@@ -103,6 +111,7 @@ packer.startup(
     }
     use {
       "lewis6991/gitsigns.nvim",
+      event = "BufAdd",
       requires = {"nvim-lua/plenary.nvim"},
       config = [[require("config.gitsigns")]]
     }
