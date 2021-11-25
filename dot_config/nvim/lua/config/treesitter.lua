@@ -5,9 +5,6 @@ require("nvim-treesitter.configs").setup({
   indent = {
     enable = true
   },
-  autotag = {
-    enable = true
-  },
   -- "all", "maintained", or a list
   ensure_installed = {
     "bash",

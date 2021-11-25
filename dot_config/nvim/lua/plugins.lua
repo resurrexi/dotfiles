@@ -28,7 +28,6 @@ packer.startup(
     -- Essentials
     use {
       "windwp/nvim-autopairs",
-      event = "InsertEnter",
       config = function()
         require("nvim-autopairs").setup({
           disable_filetype = {"TelescopePrompt"}
@@ -37,8 +36,9 @@ packer.startup(
     }
     use {
       "windwp/nvim-ts-autotag",
-      event = "InsertEnter",
-      after = "nvim-treesitter"
+      config = function()
+        require("nvim-ts-autotag").setup()
+      end
     }
     use {
       "b3nj5m1n/kommentary",
@@ -70,6 +70,7 @@ packer.startup(
     -- Completion
     use {
       "hrsh7th/nvim-cmp",
+      event = "InsertEnter",
       after = "nvim-lspconfig",
       requires = {
         "onsails/lspkind-nvim",
