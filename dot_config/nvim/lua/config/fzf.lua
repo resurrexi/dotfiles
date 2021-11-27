@@ -10,8 +10,6 @@ require("fzf-lua").setup({
 })
 
 -- Set keymaps
-local mapper = function(mode, key, result)
-  vim.api.nvim_set_keymap(mode, key, result, {noremap=true, silent=true})
-end
+local opts = {noremap = true, silent = true}
 
-mapper("n", "<leader>o", "<Cmd>FzfLua files<CR>")
+vim.api.nvim_set_keymap("n", "<leader>o", "<Cmd>FzfLua files<CR>", opts)

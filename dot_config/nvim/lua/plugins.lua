@@ -71,6 +71,11 @@ packer.startup(
       },
       config = [[require("config.fzf")]]
     }
+    use {
+      "akinsho/toggleterm.nvim",
+      event = "VimEnter",
+      config = [[require("config.toggleterm")]]
+    }
 
     -- Completion
     use {
