@@ -98,6 +98,16 @@ packer.startup(
 
     -- Aesthetics
     use {
+      "lukas-reineke/indent-blankline.nvim",
+      event = "BufAdd",
+      config = function()
+        require("indent_blankline").setup({
+          show_current_context = true,
+          show_current_context_start = true
+        })
+      end
+    }
+    use {
       "kyazdani42/nvim-web-devicons",
       config = function()
         require("nvim-web-devicons").setup({
@@ -122,6 +132,7 @@ packer.startup(
     }
     use {
       "norcalli/nvim-colorizer.lua",
+      event = "BufAdd",
       config = function()
         require("colorizer").setup({
           "*", -- highlight all filetypes
