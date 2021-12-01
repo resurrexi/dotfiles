@@ -7,6 +7,8 @@ augroup TabSpacing
   au FileType python setlocal shiftwidth=4 tabstop=4 softtabstop=4
   au FileType zsh setlocal shiftwidth=4 tabstop=4 softtabstop=4
   au FileType toml setlocal shiftwidth=4 tabstop=4 softtabstop=4
+  au FileType dockerfile setlocal shiftwidth=4 tabstop=4 softtabstop=4
+  au FileType markdown setlocal shiftwidth=4 tabstop=4 softtabstop=4 wrap
 augroup end
 
 " Recognize chezmoi and set post-save hook

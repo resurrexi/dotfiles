@@ -5,7 +5,8 @@ require("nvim-treesitter.configs").setup({
   indent = {
     enable = true,
     disable = {
-      "python" -- indent is buggy for python
+      "python", -- indent is buggy for python
+      "yaml"
     }
   },
   -- "all", "maintained", or a list
