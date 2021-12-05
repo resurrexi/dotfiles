@@ -156,5 +156,14 @@ packer.startup(
         })
       end
     }
+
+    -- Misc
+    use {
+      "ellisonleao/glow.nvim",
+      event = "VimEnter",
+      config = function()
+        vim.g.glow_binary_path = vim.env.HOME .. "/bin"
+      end
+    }
   end
 )
