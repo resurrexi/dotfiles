@@ -76,6 +76,10 @@ packer.startup(
       event = "VimEnter",
       config = [[require("config.toggleterm")]]
     }
+    use {
+      "lambdalisue/suda.vim",
+      event = "VimEnter"
+    }
 
     -- Completion
     use {
