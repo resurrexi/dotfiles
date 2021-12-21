@@ -2,9 +2,12 @@ local mapper = function(mode, key, result)
   vim.api.nvim_set_keymap(mode, key, result, {noremap = true, silent = true})
 end
 
--- Delete with registering
+-- Delete without registering
 mapper("n", "x", [["_x]])
 mapper("n", "X", [["_X]])
+
+-- Visual replace without registering
+mapper("v", "P", [["_dP]])
 
 -- Clear highlighted text
 mapper("n", "<Esc><Esc>", ":noh<CR>")
