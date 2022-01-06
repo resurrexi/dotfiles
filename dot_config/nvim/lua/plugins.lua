@@ -100,6 +100,12 @@ packer.startup(
       config = [[require("config.cmp")]]
     }
 
+    -- Motion
+    use {
+      "ggandor/lightspeed.nvim",
+      event = "BufAdd"
+    }
+
     -- Aesthetics
     use {
       "lukas-reineke/indent-blankline.nvim",
