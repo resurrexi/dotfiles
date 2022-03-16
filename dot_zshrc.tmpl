@@ -26,10 +26,12 @@ eval "$(pyenv virtualenv-init -)"
 # pyenv post-setup
 eval "$(pyenv init -)"
 
-{{- else if (eq .chezmoi.hostname "005583A") }}
+{{- if (eq .chezmoi.hostname "005583A") }}
 
 # node certificate for zscaler (TQA)
 export NODE_EXTRA_CA_CERTS="$HOME/.zscaler_ca.crt"
+
+{{- end -}}
 
 {{- end }}
 
