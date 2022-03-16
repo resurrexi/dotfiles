@@ -1,7 +1,7 @@
 require("lualine").setup({
   options = {
     icons_enabled = true, -- uses web-devicons
-    theme = "github",
+    theme = "auto",
     section_separators = {left = "", right = ""},
     component_separators = {left= "", right = ""},
   },

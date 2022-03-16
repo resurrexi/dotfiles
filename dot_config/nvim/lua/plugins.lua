@@ -131,7 +131,7 @@ packer.startup(
     }
     use {
       "nvim-lualine/lualine.nvim",
-      after = "nvim-web-devicons",
+      after = {"nvim-web-devicons", "github-nvim-theme"},
       config = [[require("config.lualine")]]
     }
     use {
@@ -157,7 +157,7 @@ packer.startup(
     use {
       "projekt0n/github-nvim-theme",
       -- load after lualine for `hide_inactive_statusline` to work
-      after = "lualine.nvim",
+      -- after = "lualine.nvim",
       config = function()
         require("github-theme").setup({
           theme_style = "dark",
