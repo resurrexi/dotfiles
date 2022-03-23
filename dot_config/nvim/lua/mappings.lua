@@ -29,6 +29,11 @@ mapper("v", "<", "<gv")
 -- Yank to end of line (like D or C)
 mapper("n", "Y", "y$")
 
+-- Copy-to/Paste-from clipboard
+mapper("v", "<Leader>y", [["*y]])
+mapper("n", "<Leader>p", [["*p]])
+mapper("v", "<Leader>p", [["*P]])
+
 -- Center search jumps
 mapper("n", "n", "nzz")
 mapper("n", "N", "Nzz")
