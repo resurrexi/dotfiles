@@ -51,8 +51,8 @@ local on_attach = function(client, bufnr)
   lsp_mapper("n", "gn", "vim.lsp.buf.type_definition()")
   lsp_mapper("n", "<leader>rn", "vim.lsp.buf.rename()")
   lsp_mapper("n", "<leader>ca", "vim.lsp.buf.code_action()")
-  lsp_mapper("n", "<leader>]", "vim.lsp.diagnostic.goto_next()")
-  lsp_mapper("n", "<leader>[", "vim.lsp.diagnostic.goto_prev()")
+  lsp_mapper("n", "<leader>]", "vim.diagnostic.goto_next()")
+  lsp_mapper("n", "<leader>[", "vim.diagnostic.goto_prev()")
   lsp_mapper("i", "<C-k>", "vim.lsp.buf.signature_help()")
 
   -- Auto-format on save
