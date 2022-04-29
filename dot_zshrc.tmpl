@@ -26,6 +26,8 @@ eval "$(pyenv virtualenv-init -)"
 # pyenv post-setup
 eval "$(pyenv init -)"
 
+export N_PREFIX="$HOME/n"; [[ :$PATH: == *":$N_PREFIX/bin:"* ]] || PATH+=":$N_PREFIX/bin"  # Added by n-install (see http://git.io/n-install-repo).
+
 {{- if (eq .chezmoi.hostname "005583A") }}
 
 # node certificate for zscaler (TQA)
@@ -216,11 +218,3 @@ n()
             rm -f "$NNN_TMPFILE" > /dev/null
     fi
 }
-
-{{- if (eq .chezmoi.hostname "Liquans-MacBook-Pro") }}
-
-export NVM_DIR="$HOME/.config/nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
-
-{{- end }}
