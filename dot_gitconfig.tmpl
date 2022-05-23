@@ -1,0 +1,17 @@
+[user]
+{{- if (eq .chezmoi.hostname "005583A") }}
+  email = liquan.yang@torqata.com
+{{- else }}
+  email = yang.liquan87@gmail.com
+{{- end }}
+
+[merge]
+  tool = vimdiff
+  conflictstyle = diff3
+
+[mergetool]
+  keepBackup = false
+  prompt = false
+
+[mergetool "vimdiff"]
+  cmd = "nvim  -d $MERGED $LOCAL $BASE $REMOTE -c 'wincmd J | wincmd ='"
