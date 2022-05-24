@@ -39,9 +39,8 @@ mapper("n", "n", "nzz")
 mapper("n", "N", "Nzz")
 
 -- Buffer jumping and management
-mapper("n", "<C-b><C-d>", ":bdelete<CR>")
-mapper("n", "<C-b><C-n>", ":bn<CR>")
-mapper("n", "<C-b><C-p>", ":bp<CR>")
+mapper("n", "<C-k>", ":bn<CR>")
+mapper("n", "<C-j>", ":bp<CR>")
 
 -- Moving lines
 mapper("n", "<A-j>", ":m .+1<CR>==")
