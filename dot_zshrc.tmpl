@@ -21,6 +21,9 @@ export PATH="$PYENV_ROOT/bin:$PATH"
 eval "$(pyenv init --path)"
 eval "$(pyenv virtualenv-init -)"
 
+# brew post-setup
+eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
+
 {{- else if (eq .chezmoi.os "darwin") }}
 
 # pyenv post-setup

@@ -38,6 +38,7 @@ font:
     style: Bold Italic
   size: 11
 window:
+  startup_mode: "Maximized"
   opacity: 0.9
   padding:
     x: 9
