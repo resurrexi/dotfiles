@@ -75,6 +75,27 @@ nvim_lsp.pyright.setup({
   on_attach = on_attach,
   capabilities = cmp_capabilities
 })
+nvim_lsp.rust_analyzer.setup({
+  on_attach = on_attach,
+  capabilities = cmp_capabilities,
+  settings = {
+    ["rust-analyzer"] = {
+      assist = {
+        importGranularity = "module",
+        importPrefix = "self"
+      },
+      cargo = {
+        loadOutDirsFromCheck = true
+      },
+      checkOnSave = {
+        command = "clippy"
+      },
+      procMacro = {
+        enable = true
+      },
+    }
+  }
+})
 
 -- Setup diagnostic clients
 -- https://github.com/iamcco/coc-diagnostic/blob/master/src/config.ts
