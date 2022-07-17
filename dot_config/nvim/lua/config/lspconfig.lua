@@ -96,6 +96,10 @@ nvim_lsp.rust_analyzer.setup({
     }
   }
 })
+nvim_lsp.solidity_ls.setup({
+  on_attach = on_attach,
+  capabilities = cmp_capabilities
+})
 
 -- Setup diagnostic clients
 -- https://github.com/iamcco/coc-diagnostic/blob/master/src/config.ts

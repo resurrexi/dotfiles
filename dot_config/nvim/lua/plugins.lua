@@ -175,5 +175,9 @@ packer.startup(
         vim.g.glow_binary_path = vim.env.HOME .. "/bin"
       end
     }
+    use {
+      "TovarishFin/vim-solidity",
+      event = "BufAdd",
+    }
   end
 )
