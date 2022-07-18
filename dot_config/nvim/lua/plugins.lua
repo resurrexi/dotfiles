@@ -73,6 +73,7 @@ packer.startup(
     }
     use {
       "akinsho/toggleterm.nvim",
+      tag = "v2.*",
       event = "VimEnter",
       config = [[require("config.toggleterm")]]
     }
