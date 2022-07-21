@@ -12,14 +12,11 @@ export PATH=$HOME/bin:/usr/local/bin:$PATH
 
 # tilix fix
 if [[ $TILIX_ID ]]; then
-  source /etc/profile.d/vte.sh
+  source /etc/profile.d/vte-2.91.sh
 fi
 
-# pyenv post-setup
-export PYENV_ROOT="$HOME/.pyenv"
-export PATH="$PYENV_ROOT/bin:$PATH"
-eval "$(pyenv init --path)"
-eval "$(pyenv virtualenv-init -)"
+# asdf post-setup
+. $(brew --prefix asdf)/libexec/asdf.sh
 
 # brew post-setup
 eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
