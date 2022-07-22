@@ -173,7 +173,11 @@ packer.startup(
       "ellisonleao/glow.nvim",
       event = "VimEnter",
       config = function()
-        vim.g.glow_binary_path = vim.env.HOME .. "/bin"
+        require("glow").setup({
+          glow_install_path = vim.env.HOME .. "/bin",
+          border = "single",
+          pager = true
+        })
       end
     }
     use {
