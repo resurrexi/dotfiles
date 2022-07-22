@@ -1,0 +1,24 @@
+[/]
+quake-hide-headerbar=true
+quake-specific-monitor=0
+terminal-title-style='none'
+window-style='borderless'
+
+[profiles/2b7c4080-0ddd-46c5-8f23-563fd3ba789d]
+background-color='#24292E'
+background-transparency-percent=15
+badge-color='#444C56'
+badge-color-set=true
+bold-color-set=false
+cursor-background-color='#C8E1FF'
+cursor-colors-set=true
+cursor-foreground-color='#C8E1FF'
+font='MesloLGS NF 11'
+foreground-color='#D1D5DA'
+highlight-background-color='#284566'
+highlight-colors-set=true
+highlight-foreground-color='#D1D5DA'
+palette=['#24292E', '#F14C4C', '#23D18B', '#E2E210', '#3B8EEA', '#BC3FBC', '#29B7DA', '#666666', '#666666', '#F14C4C', '#23D18B', '#F5F543', '#3B8EEA', '#D670D6', '#29B8DB', '#D1D5DA']
+use-system-font=false
+use-theme-colors=false
+visible-name='Default'
