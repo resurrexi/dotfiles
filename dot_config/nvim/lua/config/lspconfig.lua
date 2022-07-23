@@ -219,12 +219,12 @@ nvim_lsp.diagnosticls.setup({
         offsetColumn = 0,
         formatLines = 1,
         formatPattern = {
-          '^[ \t]{2,}(\\d+):(\\d+)[ \t]{2,}([a-z]+?)[ \t]{2,}(.*)[ \t]{2,}[a-z-]+$',
+          '^\\s+(\\d+):(\\d+)\\s+([a-z]+)\\s+(.*)\\s+([a-z-]+)$',
           {
             line = 1,
             column = 2,
             security = 3,
-            message = 4
+            message = {4, "[", 5 ,"]"}
           }
         },
         securities = {
