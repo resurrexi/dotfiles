@@ -213,23 +213,23 @@ nvim_lsp.diagnosticls.setup({
           '.solhint.json',
         },
         debounce = 100,
-        args = { '--formatter', 'stylish', '%filepath' },
+        args = { '--formatter', 'unix', '%filepath' },
         sourceName = 'solhint',
-        offsetLine = 2,
+        offsetLine = 0,
         offsetColumn = 0,
         formatLines = 1,
         formatPattern = {
-          '^\\s+(\\d+):(\\d+)\\s+([a-z]+)\\s+(.*)\\s+([a-z-]+)$',
+          '^[^:]+:(\\d+):(\\d+):\\s+([^\\[]+)\\[([A-z]+)/([a-z-]+)\\]$',
           {
             line = 1,
             column = 2,
-            security = 3,
-            message = {4, "[", 5 ,"]"}
+            security = 4,
+            message = {3, "[", 5 ,"]"}
           }
         },
         securities = {
-          error = 'error',
-          warning = 'warning'
+          Error = 'error',
+          Warning = 'warning'
         }
       }
     },
