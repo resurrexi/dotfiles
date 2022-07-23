@@ -225,6 +225,23 @@ nvim_lsp.diagnosticls.setup({
         command = 'black',
         args = { '--quiet', '-' },
         rootPatterns = { 'pyproject.toml' }
+      },
+      prettySolid = {
+        command = './node_modules/.bin/prettier',
+        args = { '--write', '%filepath' },
+        rootPatterns = {
+          '.prettierrc',
+          '.prettierrc.json',
+          '.prettierrc.toml',
+          '.prettierrc.json',
+          '.prettierrc.yml',
+          '.prettierrc.yaml',
+          '.prettierrc.json5',
+          '.prettierrc.js',
+          '.prettierrc.cjs',
+          'prettier.config.js',
+          'prettier.config.cjs'
+        }
       }
     },
     formatFiletypes = {
@@ -238,7 +255,8 @@ nvim_lsp.diagnosticls.setup({
       typescriptreact = 'prettier',
       json = 'prettier',
       markdown = 'prettier',
-      python = 'black'
+      python = 'black',
+      solidity = 'prettySolid'
     }
   }
 })
