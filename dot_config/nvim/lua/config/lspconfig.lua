@@ -105,7 +105,19 @@ nvim_lsp.solidity_ls.setup({
 -- https://github.com/iamcco/coc-diagnostic/blob/master/src/config.ts
 nvim_lsp.diagnosticls.setup({
   on_attach = on_attach,
-  filetypes = { 'javascript', 'javascriptreact', 'json', 'typescript', 'typescriptreact', 'css', 'less', 'scss', 'markdown', 'python' },
+  filetypes = {
+    'python',
+    'javascript',
+    'javascriptreact',
+    'json',
+    'typescript',
+    'typescriptreact',
+    'css',
+    'less',
+    'scss',
+    'markdown',
+    'solidity'
+  },
   init_options = {
     linters = {
       eslint = {
@@ -194,14 +206,40 @@ nvim_lsp.diagnosticls.setup({
           C = 'error',
           N = 'error'
         }
+      },
+      solhint = {
+        command = './node_modules/.bin/solhint',
+        rootPatterns = {
+          '.solhint.json',
+        },
+        debounce = 100,
+        args = { '--formatter', 'stylish', '%filepath' },
+        sourceName = 'solhint',
+        offsetLine = 2,
+        offsetColumn = 0,
+        formatLines = 1,
+        formatPattern = {
+          '^[ \t]{2,}(\\d+):(\\d+)[ \t]{2,}([a-z]+?)[ \t]{2,}(.*)[ \t]{2,}[a-z-]+$',
+          {
+            line = 1,
+            column = 2,
+            security = 3,
+            message = 4
+          }
+        },
+        securities = {
+          error = 'error',
+          warning = 'warning'
+        }
       }
     },
     filetypes = {
+      python = { 'pylint', 'flake8' },
       javascript = 'eslint',
       javascriptreact = 'eslint',
       typescript = 'eslint',
       typescriptreact = 'eslint',
-      python = { 'pylint', 'flake8' }
+      solidity = 'solhint'
     },
     formatters = {
       prettier = {
@@ -225,26 +263,10 @@ nvim_lsp.diagnosticls.setup({
         command = 'black',
         args = { '--quiet', '-' },
         rootPatterns = { 'pyproject.toml' }
-      },
-      prettySolid = {
-        command = './node_modules/.bin/prettier',
-        args = { '--write', '%filepath' },
-        rootPatterns = {
-          '.prettierrc',
-          '.prettierrc.json',
-          '.prettierrc.toml',
-          '.prettierrc.json',
-          '.prettierrc.yml',
-          '.prettierrc.yaml',
-          '.prettierrc.json5',
-          '.prettierrc.js',
-          '.prettierrc.cjs',
-          'prettier.config.js',
-          'prettier.config.cjs'
-        }
       }
     },
     formatFiletypes = {
+      python = 'black',
       css = 'prettier',
       javascript = 'prettier',
       javascriptreact = 'prettier',
@@ -255,8 +277,7 @@ nvim_lsp.diagnosticls.setup({
       typescriptreact = 'prettier',
       json = 'prettier',
       markdown = 'prettier',
-      python = 'black',
-      solidity = 'prettySolid'
+      solidity = 'prettier'
     }
   }
 })
