@@ -42,6 +42,3 @@ au SourcePost * hi Normal guibg=none ctermbg=none
 
 " Auto-apply plugin changes
 au BufWritePost plugins.lua source <afile> | PackerCompile
-
-" Format-on-write for rust filetypes (with timeout of 200ms)
-autocmd BufWritePre *.rs lua vim.lsp.buf.formatting_sync(nil, 200)
