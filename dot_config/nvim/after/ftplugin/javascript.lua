@@ -1,2 +1,2 @@
 vim.bo.autoindent = false  -- use TS indent
-vim.bo.wrap = true
+vim.wo.wrap = true
