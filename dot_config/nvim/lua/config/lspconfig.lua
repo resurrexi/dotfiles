@@ -2,10 +2,10 @@ local nvim_lsp = require("lspconfig")
 local cmp_capabilities = require("cmp_nvim_lsp").update_capabilities(vim.lsp.protocol.make_client_capabilities())
 
 -- Change diagnostic symbols
-local signs = { Error = "■", Warning = "■", Hint = "■", Information = "■" }
+local signs = { Error = "■", Warn = "■", Hint = "■", Info = "■" }
 
 for type, icon in pairs(signs) do
-  local hl = "LspDiagnosticsSign" .. type
+  local hl = "DiagnosticSign" .. type
   vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = hl })
 end
 
@@ -13,10 +13,10 @@ end
 vim.cmd([[
 augroup DiagnosticColors
 au!
-au ColorScheme * hi LspDiagnosticsDefaultError ctermbg=none guibg=none
-au ColorScheme * hi LspDiagnosticsDefaultWarning ctermbg=none guibg=none
-au ColorScheme * hi LspDiagnosticsDefaultInformation ctermbg=none guibg=none
-au ColorScheme * hi LspDiagnosticsDefaultHint ctermbg=none guibg=none
+au ColorScheme * hi DiagnosticError ctermbg=none guibg=none
+au ColorScheme * hi DiagnosticWarn ctermbg=none guibg=none
+au ColorScheme * hi DiagnosticInfo ctermbg=none guibg=none
+au ColorScheme * hi DiagnosticHint ctermbg=none guibg=none
 augroup
 ]])
 
