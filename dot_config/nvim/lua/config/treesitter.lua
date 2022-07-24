@@ -4,7 +4,10 @@ require("nvim-treesitter.configs").setup({
   },
   indent = {
     enable = true,
-    disable = {},
+    disable = {
+      "python",
+      "yaml"
+    },
   },
   -- "all", "maintained", or a list
   ensure_installed = {
