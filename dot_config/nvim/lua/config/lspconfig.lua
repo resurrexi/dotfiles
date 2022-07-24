@@ -263,10 +263,15 @@ nvim_lsp.diagnosticls.setup({
         command = 'black',
         args = { '--quiet', '-' },
         rootPatterns = { 'pyproject.toml' }
+      },
+      isort = {
+        command = 'isort',
+        args = { '--quiet', '-' },
+        rootPatterns = { 'pyproject.toml' }
       }
     },
     formatFiletypes = {
-      python = 'black',
+      python = { 'black', 'isort' },
       css = 'prettier',
       javascript = 'prettier',
       javascriptreact = 'prettier',

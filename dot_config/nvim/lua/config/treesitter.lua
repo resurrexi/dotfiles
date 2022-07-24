@@ -4,10 +4,7 @@ require("nvim-treesitter.configs").setup({
   },
   indent = {
     enable = true,
-    disable = {
-      "python", -- indent is buggy for python
-      "yaml"
-    }
+    disable = {},
   },
   -- "all", "maintained", or a list
   ensure_installed = {
@@ -17,9 +14,9 @@ require("nvim-treesitter.configs").setup({
     "html",
     "javascript",
     "json",
-    "latex",
     "lua",
     "python",
+    "rust",
     "scss",
     "toml",
     "tsx",
