@@ -181,7 +181,16 @@ packer.startup(
       end
     }
     use {
-      "TovarishFin/vim-solidity",
+      "mickael-menu/zk-nvim",
+      after = "nvim-lspconfig",
+      config = function()
+        require("zk").setup({
+          picker = "fzf"
+        })
+      end
+    }
+    use {
+      "TovarishFin/vim-solidity",  -- smart contract dev
       event = "BufAdd",
     }
   end
