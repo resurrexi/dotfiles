@@ -18,5 +18,5 @@ require("nnn").setup({
 -- Set keymaps
 local opts = {noremap = true, silent = true}
 
-vim.api.nvim_set_keymap("n", "<leader>f", "<Cmd>NnnPicker<CR>", opts)
+vim.api.nvim_set_keymap("n", "<leader>f", "<Cmd>NnnPicker %:p:h<CR>", opts)
 vim.api.nvim_set_keymap("n", "<leader>.", "<Cmd>NnnPicker $XDG_DATA_HOME/chezmoi<CR>", opts)
