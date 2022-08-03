@@ -123,6 +123,7 @@ plugins=(
 {{- if eq .chezmoi.os "linux" "darwin" }}
     gcloud
 {{- end }}
+    vi-mode
 )
 
 source $ZSH/oh-my-zsh.sh
@@ -223,3 +224,9 @@ n()
             rm -f "$NNN_TMPFILE" > /dev/null
     fi
 }
+
+# settings for vi-mode zsh plugin
+# be sure to also remove `vi-mode` from the plugins list above if removing this setting
+export VI_MODE_SET_CURSOR=true
+export MODE_INDICATOR="%F{white}+%f"
+export INSERT_MODE_INDICATOR="%F{yellow}+%f"
