@@ -9,6 +9,7 @@ fi
 export PATH=$HOME/bin:/usr/local/bin:$PATH
 
 {{- if (eq .chezmoi.os "linux") }}
+# LINUX-ONLY SETTINGS
 
 # tilix fix
 if [[ $TILIX_ID ]]; then
@@ -22,13 +23,15 @@ eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
 . $(brew --prefix asdf)/libexec/asdf.sh
 
 {{- else if (eq .chezmoi.os "darwin") }}
+# MACOS-ONLY SETTINGS
 
-# pyenv post-setup
-eval "$(pyenv init -)"
+# asdf post-setup
+. $(brew --prefix asdf)/libexec/asdf.sh
 
 export N_PREFIX="$HOME/n"; [[ :$PATH: == *":$N_PREFIX/bin:"* ]] || PATH+=":$N_PREFIX/bin"  # Added by n-install (see http://git.io/n-install-repo).
 
 {{- if (eq .chezmoi.hostname "005583A") }}
+# WORK COMPUTER SETTINGS
 
 # node certificate for zscaler (TQA)
 export NODE_EXTRA_CA_CERTS="$HOME/.zscaler_ca.crt"
