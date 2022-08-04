@@ -36,7 +36,7 @@ local on_attach = function(client, bufnr)
       bufnr,
       mode,
       key,
-      "<Cmd>lua " .. result .. "<CR>",
+      "<Cmd>" .. result .. "<CR>",
       { noremap = true, silent = true }
     )
   end
@@ -45,15 +45,15 @@ local on_attach = function(client, bufnr)
   buf_set_option("omnifunc", "v:lua.vim.lsp.omnifunc")
 
   -- See `:help vim.lsp.*` for documentation on any of the below functions
-  lsp_mapper("n", "K", "vim.lsp.buf.hover()")
-  lsp_mapper("n", "gd", "vim.lsp.buf.definition()")
-  lsp_mapper("n", "gr", "vim.lsp.buf.references()")
-  lsp_mapper("n", "gn", "vim.lsp.buf.type_definition()")
-  lsp_mapper("n", "<leader>rn", "vim.lsp.buf.rename()")
-  lsp_mapper("n", "<leader>ca", "vim.lsp.buf.code_action()")
-  lsp_mapper("n", "<leader>]", "vim.diagnostic.goto_next()")
-  lsp_mapper("n", "<leader>[", "vim.diagnostic.goto_prev()")
-  lsp_mapper("i", "gs", "vim.lsp.buf.signature_help()")
+  lsp_mapper("n", "K", "lua vim.lsp.buf.hover()")
+  lsp_mapper("n", "gd", "split | lua vim.lsp.buf.definition()")
+  lsp_mapper("n", "gr", "lua vim.lsp.buf.references()")
+  lsp_mapper("n", "gn", "split | lua vim.lsp.buf.type_definition()")
+  lsp_mapper("n", "<leader>rn", "lua vim.lsp.buf.rename()")
+  lsp_mapper("n", "<leader>ca", "lua vim.lsp.buf.code_action()")
+  lsp_mapper("n", "<leader>]", "lua vim.diagnostic.goto_next()")
+  lsp_mapper("n", "<leader>[", "lua vim.diagnostic.goto_prev()")
+  lsp_mapper("i", "gs", "lua vim.lsp.buf.signature_help()")
 
   -- Auto-format on save
   if client.resolved_capabilities.document_formatting then
