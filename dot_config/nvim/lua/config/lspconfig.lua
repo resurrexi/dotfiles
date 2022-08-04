@@ -53,7 +53,7 @@ local on_attach = function(client, bufnr)
   lsp_mapper("n", "<leader>ca", "vim.lsp.buf.code_action()")
   lsp_mapper("n", "<leader>]", "vim.diagnostic.goto_next()")
   lsp_mapper("n", "<leader>[", "vim.diagnostic.goto_prev()")
-  lsp_mapper("i", "<C-k>", "vim.lsp.buf.signature_help()")
+  lsp_mapper("i", "gs", "vim.lsp.buf.signature_help()")
 
   -- Auto-format on save
   if client.resolved_capabilities.document_formatting then
