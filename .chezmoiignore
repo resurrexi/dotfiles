@@ -11,3 +11,9 @@ LICENSE
 .config/tilix
 
 {{- end }}
+
+{{ if ne .chezmoi.os "darwin" -}}
+
+Library/
+
+{{- end }}
