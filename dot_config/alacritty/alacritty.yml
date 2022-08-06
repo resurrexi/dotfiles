@@ -25,18 +25,18 @@ colors:
     - { index: 17, color: '0xf14c4c' }
 font:
   normal:
-    family: "MesloLGS NF"
+    family: "FantasqueSansMono Nerd Font"
     style: Regular
   bold:
-    family: "MesloLGS NF"
+    family: "FantasqueSansMono Nerd Font"
     style: Bold
   italic:
-    family: "MesloLGS NF"
+    family: "FantasqueSansMono Nerd Font"
     style: Italic
   bold_italic:
-    family: "MesloLGS NF"
+    family: "FantasqueSansMono Nerd Font"
     style: Bold Italic
-  size: 11
+  size: 12
 window:
   startup_mode: "Maximized"
   opacity: 0.9
@@ -67,3 +67,4 @@ selection:
 live_config_reload: true
 key_bindings:
   - { key: N, mods: Control|Shift, action: SpawnNewInstance }
+  - { key: M, mods: Control, action: Minimize }
