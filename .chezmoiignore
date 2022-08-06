@@ -15,5 +15,6 @@ LICENSE
 {{ if ne .chezmoi.os "darwin" -}}
 
 Library/
+iterm2keys.itermkeymap
 
 {{- end }}
