@@ -13,6 +13,7 @@ vim.opt.inccommand = "split"
 vim.opt.hidden = true
 vim.opt.updatetime = 300
 vim.opt.undofile = true
+vim.opt.clipboard = "unnamedplus" -- default y/p to use clipboard
 
 -- Indentation
 vim.opt.autoindent = true
