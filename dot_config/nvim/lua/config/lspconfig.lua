@@ -271,7 +271,7 @@ nvim_lsp.diagnosticls.setup({
       isort = {
         command = 'isort',
         args = { '--quiet', '-' },
-        rootPatterns = { 'pyproject.toml' }
+        rootPatterns = { 'pyproject.toml', '.isort.cfg' }
       }
     },
     formatFiletypes = {
