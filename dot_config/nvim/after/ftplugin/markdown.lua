@@ -1,14 +1,7 @@
 vim.bo.shiftwidth = 4
 vim.bo.tabstop = 4
 vim.bo.softtabstop = 4
-
-local group = vim.api.nvim_create_augroup("Markdown Wrap Settings", { clear = true })
-
-vim.api.nvim_create_autocmd('BufEnter', {
-  pattern = "*.md",
-  group = group,
-  command = "setlocal wrap"
-})
+vim.opt_local.wrap = true
 
 -- Add the key mappings only for Markdown files in a zk notebook.
 if require("zk.util").notebook_root(vim.fn.expand('%:p')) ~= nil then
