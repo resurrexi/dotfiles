@@ -28,6 +28,16 @@ eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
 # asdf post-setup
 . $(brew --prefix asdf)/libexec/asdf.sh
 
+{{- if (eq .chezmoi.hostname "Liquans-MacBook-Pro") }}
+# PERSONAL MACBOOK
+
+# The next line updates PATH for the Google Cloud SDK.
+if [ -f '/Users/resurrexi/google-cloud-sdk/path.zsh.inc' ]; then . '/Users/resurrexi/google-cloud-sdk/path.zsh.inc'; fi
+
+# The next line enables shell command completion for gcloud.
+if [ -f '/Users/resurrexi/google-cloud-sdk/completion.zsh.inc' ]; then . '/Users/resurrexi/google-cloud-sdk/completion.zsh.inc'; fi
+
+{{- end -}}
 {{- if (eq .chezmoi.hostname "005583A") }}
 # WORK COMPUTER SETTINGS
 
@@ -35,7 +45,6 @@ eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
 export NODE_EXTRA_CA_CERTS="$HOME/.zscaler_ca.crt"
 
 {{- end -}}
-
 {{- end }}
 
 # poetry post-setup
