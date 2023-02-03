@@ -47,6 +47,9 @@ export PATH=/usr/local/opt/libpq/bin:$PATH
 # node certificate for zscaler (TQA)
 export NODE_EXTRA_CA_CERTS="$HOME/.zscaler_ca.crt"
 
+# add zscaler cert for poetry
+export REQUESTS_CA_BUNDLE="$HOME/allCAbundle.pem"
+
 {{- end -}}
 {{- end }}
 
