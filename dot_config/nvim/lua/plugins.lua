@@ -43,14 +43,10 @@ packer.startup(
       end
     }
     use {
-      "b3nj5m1n/kommentary",
+      "numToStr/Comment.nvim",
       event = "BufAdd",
       config = function()
-        require("kommentary.config").configure_language("default", {
-          prefer_single_line_comments = true,
-          use_consistent_indentation = true,
-          ignore_whitespace = true
-        })
+        require("Comment").setup()
       end
     }
     use {
@@ -73,7 +69,7 @@ packer.startup(
     }
     use {
       "akinsho/toggleterm.nvim",
-      tag = "v2.*",
+      tag = "*",
       event = "VimEnter",
       config = [[require("config.toggleterm")]]
     }
