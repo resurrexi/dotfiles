@@ -60,7 +60,7 @@ local on_attach = function(client, bufnr)
   lsp_mapper("i", "<C-k>", "lua vim.lsp.buf.signature_help()")
 
   -- Auto-format on save
-  if client.resolved_capabilities.document_formatting then
+  if client.server_capabilities.document_formatting then
     vim.cmd([[
     augroup Format
     autocmd! * <buffer>
