@@ -48,7 +48,13 @@ export PATH=/usr/local/opt/libpq/bin:$PATH
 export NODE_EXTRA_CA_CERTS="$HOME/.zscaler_ca.crt"
 
 # add zscaler cert for poetry
+export CERT_PATH="$HOME/allCAbundle.pem"
+export SSL_CERT_FILE="$HOME/allCAbundle.pem"
 export REQUESTS_CA_BUNDLE="$HOME/allCAbundle.pem"
+export HTTPLIB2_CA_CERTS="$HOME/allCAbundle.pem"
+
+# inject Zscaler cert contents for docker builds
+export ZSCALER_CA=$(cat "$HOME/.zscaler_ca.crt")
 
 {{- end -}}
 {{- end }}
