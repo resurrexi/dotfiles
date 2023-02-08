@@ -109,13 +109,12 @@ packer.startup(
       event = "BufAdd",
       config = function()
         require("indent_blankline").setup({
-          show_current_context = true,
-          show_current_context_start = true
+          show_current_context = true
         })
       end
     }
     use {
-      "kyazdani42/nvim-web-devicons",
+      "nvim-tree/nvim-web-devicons",
       config = function()
         require("nvim-web-devicons").setup({
           default = true -- globally enable default icons
@@ -138,23 +137,25 @@ packer.startup(
       config = [[require("config.gitsigns")]]
     }
     use {
-      "norcalli/nvim-colorizer.lua",
+      "NvChad/nvim-colorizer.lua",
       event = "BufAdd",
       config = function()
         require("colorizer").setup({
-          "*", -- highlight all filetypes
-          "!vim", -- but exclude vim
-          "!lua", -- and exclude lua
-          css = {rgb_fn = true}
-        }, {
-          RRGGBBAA = true
+          filetypes = {
+            "*", -- highlight all filetypes
+            "!vim", -- but exclude vim
+            "!lua", -- and exclude lua
+            css = {rgb_fn = true}
+          },
+          user_default_options = {
+            RRGGBBAA = true
+          }
         })
       end
     }
     use {
       "projekt0n/github-nvim-theme",
-      -- load after lualine for `hide_inactive_statusline` to work
-      -- after = "lualine.nvim",
+      tag = "v0.0.7",
       config = function()
         require("github-theme").setup({
           theme_style = "dark",
@@ -170,7 +171,7 @@ packer.startup(
       event = "VimEnter",
       config = function()
         require("glow").setup({
-          glow_install_path = vim.env.HOME .. "/bin",
+          install_path = vim.env.HOME .. "/bin",
           border = "single",
           pager = true
         })
@@ -179,7 +180,7 @@ packer.startup(
     use {
       "mickael-menu/zk-nvim",
       after = "nvim-lspconfig",
-      config = [[require("config.zk-nvim")]]
+      config = [[require("config.zknvim")]]
     }
     use {
       "TovarishFin/vim-solidity",  -- smart contract dev
