@@ -21,13 +21,14 @@ augroup
 ]])
 
 -- Customize diagnostics
-vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
-  vim.lsp.diagnostic.on_publish_diagnostics, {
-    underline = true,
-    virtual_text = false,
-    update_in_insert = true
-  }
-)
+vim.diagnostic.config({
+  float = {
+    source = "if_many",
+  },
+  virtual_text = false,
+  severity_sort = true,
+  update_in_insert = true,
+})
 
 -- Setup attach method for each buffer
 local on_attach = function(client, bufnr)
@@ -60,11 +61,11 @@ local on_attach = function(client, bufnr)
   lsp_mapper("i", "<C-k>", "lua vim.lsp.buf.signature_help()")
 
   -- Auto-format on save
-  if client.server_capabilities.document_formatting then
+  if client.server_capabilities.documentFormattingProvider then
     vim.cmd([[
     augroup Format
     autocmd! * <buffer>
-    autocmd BufWritePre <buffer> lua vim.lsp.buf.formatting_seq_sync()
+    autocmd BufWritePre <buffer> lua vim.lsp.buf.format()
     augroup end
     ]])
   end
