@@ -64,7 +64,7 @@ local on_attach = function(client, bufnr)
     vim.cmd([[
     augroup Format
     autocmd! * <buffer>
-    autocmd BufWritePre <buffer> lua vim.lsp.buf.format()
+    autocmd BufWritePre <buffer> lua vim.lsp.buf.formatting_seq_sync()
     augroup end
     ]])
   end
@@ -72,10 +72,6 @@ end
 
 -- LSP servers
 nvim_lsp.tsserver.setup({
-  on_attach = on_attach,
-  capabilities = cmp_capabilities
-})
-nvim_lsp.pyright.setup({
   on_attach = on_attach,
   capabilities = cmp_capabilities
 })
