@@ -40,17 +40,12 @@ require("lualine").setup({
     lualine_z = {}
   },
   tabline = {
-    lualine_a = {
-      {
-        "filename",
-        path = 0 -- filename
-      }
-    },
+    lualine_a = {"buffers"},
     lualine_b = {},
     lualine_c = {},
     lualine_x = {},
     lualine_y = {},
-    lualine_z = {}
+    lualine_z = {"tabs"}
   },
   winbar = {},
   inactive_winbar = {},
