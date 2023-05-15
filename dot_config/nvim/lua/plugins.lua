@@ -182,6 +182,14 @@ packer.startup(
       after = "nvim-lspconfig",
       config = [[require("config.zknvim")]]
     }
+
+    -- Language support
+    use {
+      "simrat39/rust-tools.nvim",
+      after = "nvim-lspconfig",
+      event = "BufAdd",
+      config = [[require("config.rust-tools")]]
+    }
     use {
       "TovarishFin/vim-solidity",  -- smart contract dev
       event = "BufAdd",

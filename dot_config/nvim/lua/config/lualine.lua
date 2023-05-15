@@ -20,6 +20,7 @@ require("lualine").setup({
       {
         "diagnostics",
         sources = {"nvim_diagnostic"},
+        symbols = {error = "E", warn = "W", info = "I", hint = "H"}
       }
     },
     lualine_y = {"filetype"},
