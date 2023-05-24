@@ -115,11 +115,6 @@ packer.startup(
     }
     use {
       "nvim-tree/nvim-web-devicons",
-      config = function()
-        require("nvim-web-devicons").setup({
-          default = true -- globally enable default icons
-        })
-      end
     }
     use {
       "folke/lsp-colors.nvim",
