@@ -23,15 +23,11 @@ cmp.setup({
   sources = {
     {name = "nvim_lsp", max_item_count = 20}, -- tsserver likes to send back everything
     {name = "luasnip"},
-    {name = "buffer", options = {
-      get_bufnrs = function()
-        return vim.api.nvim_list_bufs()
-      end
-    }}
+    {name = "buffer" }
   },
   formatting = {
     format = lspkind.cmp_format({
-      with_text = true,
+      mode = "symbol_text",
       menu = ({
         buffer = "[Buffer]",
         nvim_lsp = "[LSP]",
@@ -44,7 +40,7 @@ cmp.setup({
 })
 
 -- Use buffer source for '/'
-cmp.setup.cmdline("/", {
+cmp.setup.cmdline({ "/", "?" }, {
   sources = {
     {name = "buffer"}
   }
