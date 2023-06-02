@@ -150,13 +150,14 @@ packer.startup(
     }
     use {
       "projekt0n/github-nvim-theme",
-      tag = "v0.0.7",
       config = function()
         require("github-theme").setup({
-          theme_style = "dark",
-          transparent = true,
-          hide_inactive_statusline = false
+          options = {
+            transparent = true,
+            hide_nc_statusline = false
+          }
         })
+        vim.cmd("colorscheme github_dark")
       end
     }
 
