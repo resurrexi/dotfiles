@@ -154,7 +154,8 @@ packer.startup(
         require("github-theme").setup({
           options = {
             transparent = true,
-            hide_nc_statusline = false
+            hide_nc_statusline = false,
+            terminal_colors = false
           }
         })
         vim.cmd("colorscheme github_dark")
