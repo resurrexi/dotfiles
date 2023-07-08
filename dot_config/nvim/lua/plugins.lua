@@ -190,5 +190,9 @@ packer.startup(
       "TovarishFin/vim-solidity",  -- smart contract dev
       event = "BufAdd",
     }
+    use {
+      "prisma/vim-prisma",
+      event = "BufAdd"
+    }
   end
 )
