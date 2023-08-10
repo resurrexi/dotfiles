@@ -8,11 +8,10 @@ require("lualine").setup({
   sections = {
     lualine_a = {"mode"},
     lualine_b = {
-      "branch",
       {
         "filename",
-        file_status = true,
-        path = 1 -- relative path
+        file_status = false,
+        path = 4 -- filename & parent dir
       }
     },
     lualine_c = {"b:gitsigns_status"},
@@ -41,7 +40,7 @@ require("lualine").setup({
     lualine_z = {}
   },
   tabline = {
-    lualine_a = {"filename"},
+    lualine_a = {"branch", "filename"},
     lualine_b = {},
     lualine_c = {},
     lualine_x = {},
