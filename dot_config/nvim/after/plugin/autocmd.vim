@@ -39,6 +39,3 @@ au SourcePost * hi Normal guibg=none ctermbg=none
   \ | hi NonText guibg=none ctermbg=none
   \ | hi CursorLineNr guibg=none ctermbg=none
   \ | hi FloatBorder guibg=none ctermbg=none
-
-" Auto-apply plugin changes
-au BufWritePost plugins.lua source <afile> | PackerCompile
