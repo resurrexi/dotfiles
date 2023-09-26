@@ -34,21 +34,12 @@ require("lazy").setup({
   -- Essentials
   {
     "windwp/nvim-autopairs",
-    event = "InsertEnter",
     opts = {
       disable_filetype = {"TelescopePrompt"},
     }
   },
-  {
-    "windwp/nvim-ts-autotag",
-    event = "BufAdd", -- doesn't work with InsertEnter
-    opts = {}
-  },
-  {
-    "numToStr/Comment.nvim",
-    event = "BufAdd",
-    opts = {}
-  },
+  { "windwp/nvim-ts-autotag" },
+  { "numToStr/Comment.nvim" },
   {
     "luukvbaal/nnn.nvim",
     config = function()
@@ -80,10 +71,6 @@ require("lazy").setup({
   -- Completion
   {
     "hrsh7th/nvim-cmp",
-    event = {
-      "InsertEnter",
-      "CmdlineEnter" -- to allow loading for cmdline after startup
-    },
     dependencies = {
       "onsails/lspkind-nvim",
       "hrsh7th/cmp-nvim-lsp",
@@ -98,16 +85,11 @@ require("lazy").setup({
   },
 
   -- Motion
-  {
-    "ggandor/lightspeed.nvim",
-    event = "BufAdd",
-    opts = {}
-  },
+  { "ggandor/lightspeed.nvim" },
 
   -- Aesthetics
   {
     "lukas-reineke/indent-blankline.nvim",
-    event = "BufAdd",
     opts = {
       show_current_context = true,
     }
@@ -125,14 +107,12 @@ require("lazy").setup({
   },
   {
     "lewis6991/gitsigns.nvim",
-    event = "BufAdd",
     config = function()
       require("config.gitsigns")
     end
   },
   {
     "NvChad/nvim-colorizer.lua",
-    event = "BufAdd",
     opts = {
       filetypes = {
         "*", -- highlight all filetypes
@@ -181,20 +161,11 @@ require("lazy").setup({
   -- Language support
   {
     "simrat39/rust-tools.nvim",
-    event = "BufAdd",
     dependencies = {"neovim/nvim-lspconfig"},
     config = function()
       require("config.rust-tools")
     end
   },
-  {
-    "TovarishFin/vim-solidity",  -- smart contract dev
-    event = "BufAdd",
-    opts = {}
-  },
-  {
-    "prisma/vim-prisma",
-    event = "BufAdd",
-    opts = {}
-  },
+  { "TovarishFin/vim-solidity" },
+  { "prisma/vim-prisma" },
 })
