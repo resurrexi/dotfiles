@@ -34,25 +34,38 @@ require("lazy").setup({
   -- Essentials
   {
     "windwp/nvim-autopairs",
+    event = "InsertEnter",
     opts = {
       disable_filetype = {"TelescopePrompt"},
     }
   },
-  { "windwp/nvim-ts-autotag" },
-  { "numToStr/Comment.nvim" },
+  {
+    "windwp/nvim-ts-autotag",
+    event = "BufAdd", -- doesn't work with InsertEnter
+    config = true
+  },
+  {
+    "numToStr/Comment.nvim",
+    event = "BufAdd",
+    config = true
+  },
   {
     "luukvbaal/nnn.nvim",
+    event = "VimEnter",
     config = function()
       require("config.nnn")
     end
   },
   {
     "junegunn/fzf",
+    lazy = true,
     build = "./install --bin" -- install fzf if not exists
   },
   {
     "ibhagwan/fzf-lua",
+    event = "VimEnter",
     dependencies = {
+      "junegunn/fzf",
       "nvim-tree/nvim-web-devicons",
     },
     config = function()
@@ -62,6 +75,7 @@ require("lazy").setup({
   {
     "akinsho/toggleterm.nvim",
     version = "*",
+    event = "VimEnter",
     config = function()
       require("config.toggleterm")
     end
@@ -71,6 +85,10 @@ require("lazy").setup({
   -- Completion
   {
     "hrsh7th/nvim-cmp",
+    event = {
+      "InsertEnter",
+      "CmdlineEnter" -- to allow loading for cmdline after startup
+    },
     dependencies = {
       "onsails/lspkind-nvim",
       "hrsh7th/cmp-nvim-lsp",
@@ -85,16 +103,24 @@ require("lazy").setup({
   },
 
   -- Motion
-  { "ggandor/lightspeed.nvim" },
+  {
+    "ggandor/lightspeed.nvim",
+    event = "BufAdd",
+    config = true
+  },
 
   -- Aesthetics
   {
     "lukas-reineke/indent-blankline.nvim",
+    event = "BufAdd",
     opts = {
       show_current_context = true,
     }
   },
-  { "nvim-tree/nvim-web-devicons" },
+  {
+    "nvim-tree/nvim-web-devicons",
+    config = true
+  },
   {
     "nvim-lualine/lualine.nvim",
     dependencies = {
@@ -107,12 +133,14 @@ require("lazy").setup({
   },
   {
     "lewis6991/gitsigns.nvim",
+    event = "BufAdd",
     config = function()
       require("config.gitsigns")
     end
   },
   {
     "NvChad/nvim-colorizer.lua",
+    event = "BufAdd",
     opts = {
       filetypes = {
         "*", -- highlight all filetypes
@@ -144,6 +172,7 @@ require("lazy").setup({
   -- Misc
   {
     "ellisonleao/glow.nvim",
+    event = "VimEnter",
     opts = {
       install_path = vim.env.HOME .. "/bin",
       border = "single",
@@ -161,6 +190,7 @@ require("lazy").setup({
   -- Language support
   {
     "simrat39/rust-tools.nvim",
+    event = "BufAdd",
     dependencies = {"neovim/nvim-lspconfig"},
     config = function()
       require("config.rust-tools")
