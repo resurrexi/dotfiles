@@ -196,6 +196,12 @@ require("lazy").setup({
       require("config.rust-tools")
     end
   },
-  { "TovarishFin/vim-solidity" },
-  { "prisma/vim-prisma" },
+  {
+    "TovarishFin/vim-solidity",
+    ft = { "solidity" }
+  },
+  {
+    "prisma/vim-prisma",
+    ft = { "prisma" }
+  },
 })
