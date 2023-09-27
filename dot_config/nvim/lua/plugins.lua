@@ -185,7 +185,10 @@ require("lazy").setup({
     "ellisonleao/glow.nvim",
     ft = { "markdown" },
     opts = {
-      border = "single"
+      border = "single",
+      width = 256,
+      height = 128,
+      pager = false
     }
   },
   {
