@@ -41,12 +41,16 @@ require("lazy").setup({
   },
   {
     "windwp/nvim-ts-autotag",
-    event = "BufAdd", -- doesn't work with InsertEnter
+    event = "VimEnter", -- doesn't work with InsertEnter
+    dependencies = { "nvim-treesitter/nvim-treesitter" },
     config = true
   },
   {
     "numToStr/Comment.nvim",
-    event = "BufAdd",
+    event = {
+      "BufNewFile",
+      "BufReadPre",
+    },
     config = true
   },
   {
@@ -57,15 +61,10 @@ require("lazy").setup({
     end
   },
   {
-    "junegunn/fzf",
-    lazy = true,
-    build = "./install --bin" -- install fzf if not exists
-  },
-  {
     "ibhagwan/fzf-lua",
     event = "VimEnter",
     dependencies = {
-      "junegunn/fzf",
+      { "junegunn/fzf", lazy = true, build = "./install --bin" },
       "nvim-tree/nvim-web-devicons",
     },
     config = function()
@@ -105,20 +104,26 @@ require("lazy").setup({
   -- Motion
   {
     "ggandor/lightspeed.nvim",
-    event = "BufAdd",
+    event = {
+      "BufNewFile",
+      "BufReadPre",
+    },
     config = true
   },
 
   -- Aesthetics
   {
     "lukas-reineke/indent-blankline.nvim",
-    event = "BufAdd",
+    event = {
+      "BufNewFile",
+      "BufReadPre",
+    },
     opts = {
       show_current_context = true,
     }
   },
-  {
-    "nvim-tree/nvim-web-devicons",
+  { "nvim-tree/nvim-web-devicons",
+    lazy = true,
     config = true
   },
   {
@@ -133,20 +138,26 @@ require("lazy").setup({
   },
   {
     "lewis6991/gitsigns.nvim",
-    event = "BufAdd",
+    event = {
+      "BufNewFile",
+      "BufReadPre",
+    },
     config = function()
       require("config.gitsigns")
     end
   },
   {
     "NvChad/nvim-colorizer.lua",
-    event = "BufAdd",
+    event = {
+      "BufNewFile",
+      "BufReadPre",
+    },
     opts = {
       filetypes = {
         "*", -- highlight all filetypes
         "!vim", -- but exclude vim
         "!lua", -- and exclude lua
-        css = {rgb_fn = true}
+        css = { rgb_fn = true }
       },
       user_default_options = {
         RRGGBBAA = true
@@ -172,7 +183,7 @@ require("lazy").setup({
   -- Misc
   {
     "ellisonleao/glow.nvim",
-    event = "VimEnter",
+    ft = { "markdown" },
     opts = {
       install_path = vim.env.HOME .. "/bin",
       border = "single",
@@ -181,7 +192,7 @@ require("lazy").setup({
   },
   {
     "mickael-menu/zk-nvim",
-    dependencies = {"neovim/nvim-lspconfig"},
+    dependencies = { "neovim/nvim-lspconfig" },
     config = function()
       require("config.zknvim")
     end
@@ -190,8 +201,8 @@ require("lazy").setup({
   -- Language support
   {
     "simrat39/rust-tools.nvim",
-    event = "BufAdd",
-    dependencies = {"neovim/nvim-lspconfig"},
+    dependencies = { "neovim/nvim-lspconfig" },
+    ft = { "rust" },
     config = function()
       require("config.rust-tools")
     end
