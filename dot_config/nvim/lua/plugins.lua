@@ -185,9 +185,7 @@ require("lazy").setup({
     "ellisonleao/glow.nvim",
     ft = { "markdown" },
     opts = {
-      install_path = vim.env.HOME .. "/bin",
-      border = "single",
-      pager = true
+      border = "single"
     }
   },
   {
