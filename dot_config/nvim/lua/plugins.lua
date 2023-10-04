@@ -114,12 +114,10 @@ require("lazy").setup({
   -- Aesthetics
   {
     "lukas-reineke/indent-blankline.nvim",
-    event = {
-      "BufNewFile",
-      "BufReadPre",
-    },
+    event = "BufEnter",
+    main = "ibl",
     opts = {
-      show_current_context = true,
+      scope = { enabled = false }
     }
   },
   { "nvim-tree/nvim-web-devicons",
@@ -200,6 +198,10 @@ require("lazy").setup({
   },
 
   -- Language support
+  {
+    "Exafunction/codeium.vim",
+    event = "BufEnter"
+  },
   {
     "simrat39/rust-tools.nvim",
     dependencies = { "neovim/nvim-lspconfig" },
