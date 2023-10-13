@@ -23,17 +23,20 @@ cmp.setup({
   sources = {
     {name = "nvim_lsp", max_item_count = 20}, -- tsserver likes to send back everything
     {name = "luasnip"},
-    {name = "buffer" }
+    {name = "buffer" },
+    {name = "codeium"}
   },
   formatting = {
     format = lspkind.cmp_format({
-      mode = "symbol_text",
+      mode = "symbol",
+      symbol_map = { Codeium = "" },
       menu = ({
         buffer = "[Buffer]",
         nvim_lsp = "[LSP]",
         luasnip = "[Snip]",
         nvim_lua = "[Lua]",
-        latex_symbols = "[Latex]"
+        latex_symbols = "[Latex]",
+        codeium = "[Codeium]"
       })
     })
   }
