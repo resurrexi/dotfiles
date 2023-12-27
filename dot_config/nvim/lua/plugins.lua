@@ -158,7 +158,8 @@ require("lazy").setup({
         css = { rgb_fn = true }
       },
       user_default_options = {
-        RRGGBBAA = true
+        RRGGBBAA = true,
+        tailwind = true,
       }
     }
   },
