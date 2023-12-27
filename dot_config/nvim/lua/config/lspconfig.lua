@@ -1,5 +1,8 @@
 local nvim_lsp = require("lspconfig")
 local cmp_capabilities = require("cmp_nvim_lsp").default_capabilities(vim.lsp.protocol.make_client_capabilities())
+local lsp_flags = {
+  debounce_text_changes = 150,
+}
 
 -- Change diagnostic symbols
 local signs = { Error = "■", Warn = "■", Hint = "■", Info = "■" }
@@ -33,23 +36,28 @@ vim.diagnostic.config({
 -- LSP servers
 nvim_lsp.tsserver.setup({
   on_attach = require("config.lsp_attach").on_attach,
-  capabilities = cmp_capabilities
+  capabilities = cmp_capabilities,
+  flags = lsp_flags,
 })
 nvim_lsp.pyright.setup({
   on_attach = require("config.lsp_attach").on_attach,
-  capabilities = cmp_capabilities
+  capabilities = cmp_capabilities,
+  flags = lsp_flags,
 })
 nvim_lsp.solidity_ls.setup({
   on_attach = require("config.lsp_attach").on_attach,
-  capabilities = cmp_capabilities
+  capabilities = cmp_capabilities,
+  flags = lsp_flags,
 })
 nvim_lsp.prismals.setup({
   on_attach = require("config.lsp_attach").on_attach,
-  capabilities = cmp_capabilities
+  capabilities = cmp_capabilities,
+  flags = lsp_flags,
 })
 nvim_lsp.tailwindcss.setup({
   on_attach = require("config.lsp_attach").on_attach,
-  capabilities = cmp_capabilities
+  capabilities = cmp_capabilities,
+  flags = lsp_flags,
 })
 
 -- Setup diagnostic clients
@@ -81,7 +89,7 @@ nvim_lsp.diagnosticls.setup({
           '.eslintrc.json',
           'package.json'
         },
-        debounce = 100,
+        debounce = 500,
         args = { '--stdin', '--stdin-filename', '%filepath', '--format', 'json' },
         sourceName = 'eslint',
         parseJson = {
@@ -134,7 +142,7 @@ nvim_lsp.diagnosticls.setup({
       },
       flake8 = {
         command = 'flake8',
-        debounce = 100,
+        debounce = 500,
         args = { '--format=%(row)d,%(col)d,%(code).1s,%(code)s: %(text)s', '-' },
         rootPatterns = { '.flake8', 'setup.cfg', 'tox.ini' },
         offsetLine = 0,
@@ -163,7 +171,7 @@ nvim_lsp.diagnosticls.setup({
         rootPatterns = {
           '.solhint.json',
         },
-        debounce = 100,
+        debounce = 500,
         args = { '--formatter', 'unix', '%filepath' },
         sourceName = 'solhint',
         offsetLine = 0,
