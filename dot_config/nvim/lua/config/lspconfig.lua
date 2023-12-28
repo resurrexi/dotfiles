@@ -203,7 +203,7 @@ nvim_lsp.diagnosticls.setup({
     formatters = {
       prettier = {
         command = './node_modules/.bin/prettier',
-        args = { '--stdin', '--stdin-filepath', '%filepath' },
+        args = { '--stdin-filepath', '%filepath' },
         rootPatterns = {
           '.prettierrc',
           '.prettierrc.json',
