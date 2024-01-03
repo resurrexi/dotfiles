@@ -15,19 +15,23 @@ require("nvim-treesitter.configs").setup({
   -- "all", "maintained", or a list
   ensure_installed = {
     "bash",
+    "c",
     "css",
     "dockerfile",
     "html",
     "javascript",
     "json",
     "lua",
+    "markdown",
     "python",
+    "query",
     "rust",
     "scss",
     "toml",
     "tsx",
     "typescript",
     "vim",
+    "vimdoc",
     "yaml"
   }
 })
