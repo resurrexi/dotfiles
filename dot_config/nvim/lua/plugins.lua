@@ -200,17 +200,17 @@ require("lazy").setup({
   },
 
   -- Language support
-  {
-    "Exafunction/codeium.nvim",
-    dependencies = {
-      "nvim-lua/plenary.nvim",
-      "hrsh7th/nvim-cmp",
-    },
-    event = "BufEnter",
-    config = function()
-      require("codeium").setup({})
-    end
-  },
+  -- {
+  --   "Exafunction/codeium.nvim",
+  --   dependencies = {
+  --     "nvim-lua/plenary.nvim",
+  --     "hrsh7th/nvim-cmp",
+  --   },
+  --   event = "BufEnter",
+  --   config = function()
+  --     require("codeium").setup({})
+  --   end
+  -- },
   {
     "simrat39/rust-tools.nvim",
     dependencies = { "neovim/nvim-lspconfig" },
