@@ -31,4 +31,5 @@
 [".config/nnn/plugins/chksum"]
     type = "file"
     url = "https://raw.githubusercontent.com/jarun/nnn/master/plugins/chksum"
+    executable = true
     refreshPeriod = "168h"
