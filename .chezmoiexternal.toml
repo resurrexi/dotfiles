@@ -28,3 +28,7 @@
     exact = true
     stripComponents = 1
     refreshPeriod = "168h"
+[".config/nnn/plugins/chksum"]
+    type = "file"
+    url = "https://raw.githubusercontent.com/jarun/nnn/master/plugins/chksum"
+    refreshPeriod = "168h"
