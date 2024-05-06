@@ -51,6 +51,9 @@ export SSL_CERT_FILE="$HOME/allCAbundle.pem"
 export REQUESTS_CA_BUNDLE="$HOME/allCAbundle.pem"
 export HTTPLIB2_CA_CERTS="$HOME/allCAbundle.pem"
 
+# for SAP Hybris local
+export JAVA_HOME=`/usr/libexec/java_home -v 17`
+
 {{- end -}}
 {{- end }}
 
