@@ -166,6 +166,25 @@ nvim_lsp.diagnosticls.setup({
           N = 'error'
         }
       },
+      ruff = {
+        command = 'ruff',
+        debounce = 500,
+        args = { 'check', '--output-format', 'json', '%filepath' },
+        rootPatterns = { 'pyproject.toml', 'ruff.toml' },
+        sourceName = 'ruff',
+        parseJson = {
+          line = 'location.row',
+          column = 'location.column',
+          endLine = 'end_location.row',
+          endColumn = 'end_location.column',
+          message = '${message} [${code}]',
+          security = 'fix.applicability'
+        },
+        securities = {
+          safe = 'warning',
+          unsafe = 'error'
+        }
+      },
       solhint = {
         command = './node_modules/.bin/solhint',
         rootPatterns = {
@@ -193,7 +212,7 @@ nvim_lsp.diagnosticls.setup({
       }
     },
     filetypes = {
-      python = { 'pylint', 'flake8' },
+      python = { 'pylint', 'flake8', 'ruff' },
       javascript = 'eslint',
       javascriptreact = 'eslint',
       typescript = 'eslint',
