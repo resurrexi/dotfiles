@@ -247,13 +247,23 @@ nvim_lsp.diagnosticls.setup({
         args = { '--quiet', '-' },
         rootPatterns = { 'pyproject.toml', '.isort.cfg' }
       },
+      ruff_fmt = {
+        command = 'ruff',
+        args = { 'format', '--quiet', '-' },
+        rootPatterns = { 'pyproject.toml', 'ruff.toml' }
+      },
+      ruff_isort = {
+        command = 'ruff',
+        args = { 'check', '--select', 'I', '--fix', '--quiet', '-' },
+        rootPatterns = { 'pyproject.toml', 'ruff.toml' }
+      },
       rustfmt = {
         command = 'rustfmt',
         rootPatterns = { 'Cargo.toml' }
       }
     },
     formatFiletypes = {
-      python = { 'black', 'isort' },
+      python = { 'black', 'isort', 'ruff_fmt', 'ruff_isort' },
       css = 'prettier',
       javascript = 'prettier',
       javascriptreact = 'prettier',
