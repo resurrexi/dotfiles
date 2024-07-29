@@ -29,8 +29,8 @@ eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
 . $(brew --prefix asdf)/libexec/asdf.sh
 
 # gcloud components
-if [ -f "$(brew --prefix)/share/google-cloud-sdk/path.zsh.inc" ]; then source "$(brew --prefix)/share/google-cloud-sdk/path.zsh.inc"; fi
-if [ -f "$(brew --prefix)/share/google-cloud-sdk/completion.zsh.inc" ]; then source "$(brew --prefix)/share/google-cloud-sdk/completion.zsh.inc"; fi
+if [ -f "$HOME/google-cloud-sdk/path.zsh.inc" ]; then source "$HOME/google-cloud-sdk/path.zsh.inc"; fi
+if [ -f "$HOME/google-cloud-sdk/completion.zsh.inc" ]; then source "$HOME/google-cloud-sdk/completion.zsh.inc"; fi
 
 {{- if (eq .chezmoi.hostname "Liquans-MacBook-Pro") }}
 # PERSONAL MACBOOK
