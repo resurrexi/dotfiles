@@ -75,7 +75,8 @@ nvim_lsp.diagnosticls.setup({
     'less',
     'scss',
     'markdown',
-    'solidity'
+    'solidity',
+    'sql'
   },
   init_options = {
     linters = {
@@ -260,6 +261,11 @@ nvim_lsp.diagnosticls.setup({
       rustfmt = {
         command = 'rustfmt',
         rootPatterns = { 'Cargo.toml' }
+      },
+      sqlfmt = {
+        command = 'sqlfmt',
+        args = { '--quiet', '-' },
+        rootPatterns = { 'dbt_project.toml' }
       }
     },
     formatFiletypes = {
@@ -275,7 +281,8 @@ nvim_lsp.diagnosticls.setup({
       json = 'prettier',
       markdown = 'prettier',
       solidity = 'prettier',
-      rust = 'rustfmt'
+      rust = 'rustfmt',
+      sql = 'sqlfmt'
     }
   }
 })
