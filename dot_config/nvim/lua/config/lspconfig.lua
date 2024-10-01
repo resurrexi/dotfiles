@@ -34,7 +34,7 @@ vim.diagnostic.config({
 })
 
 -- LSP servers
-nvim_lsp.tsserver.setup({
+nvim_lsp.ts_ls.setup({
   on_attach = require("config.lsp_attach").on_attach,
   capabilities = cmp_capabilities,
   flags = lsp_flags,
