@@ -202,6 +202,7 @@ require("lazy").setup({
   -- Language support
   {
     "Exafunction/codeium.nvim",
+    commit = "937667b2cadc7905e6b9ba18ecf84694cf227567",
     dependencies = {
       "nvim-lua/plenary.nvim",
       "hrsh7th/nvim-cmp",
