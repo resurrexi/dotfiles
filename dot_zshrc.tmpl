@@ -255,3 +255,33 @@ export NNN_PLUG='c:-chksum;b:!bat "$nnn"'
 export VI_MODE_SET_CURSOR=true
 export MODE_INDICATOR="%F{white}+%f"
 export INSERT_MODE_INDICATOR="%F{yellow}+%f"
+
+{{- if (eq .chezmoi.hostname "005583a") }}
+# shortcuts to switch project context in k8s
+configure_kubectl() {
+  local env=$1
+  local project=$2
+  local zone=$3
+  local context_prefix=$4
+  gcloud container clusters get-credentials $env --zone $zone --project=$project
+  kubectl config delete-context $context_prefix-$env
+  kubectl config rename-context gke_${project}_${zone}_${env} $context_prefix-$env
+}
+
+alias auth_tqt='
+  gcloud config set account liquan.yang@torqata.com
+  configure_kubectl stage gcp-tqt-stage us-central1 tqt
+  configure_kubectl prod gcp-tqt-prod us-central1 tqt
+  gcloud auth login
+  gcloud auth application-default login
+'
+
+alias auth_cdp='
+  gcloud config set account lyang@atd-us.com
+  configure_kubectl dev atd-cdp-dev us-east1 atd
+  configure_kubectl qa atd-cdp-qa us-east1 atd
+  configure_kubectl prod atd-cdp-prod us-east1 atd
+  gcloud auth login
+  gcloud auth application-default login
+'
+{{- end }}
