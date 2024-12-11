@@ -24,7 +24,8 @@ cmp.setup({
     {name = "nvim_lsp", max_item_count = 20}, -- tsserver likes to send back everything
     {name = "luasnip"},
     {name = "buffer" },
-    {name = "codeium"}
+    {name = "codeium"},
+    {name = "cmp-dbee"} -- nvim-dbee extension
   },
   formatting = {
     format = lspkind.cmp_format({

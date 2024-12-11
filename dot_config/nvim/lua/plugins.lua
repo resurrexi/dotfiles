@@ -96,6 +96,11 @@ require("lazy").setup({
       "hrsh7th/cmp-cmdline",
       {"L3MON4D3/LuaSnip", version = "v2.*"},
       "saadparwaiz1/cmp_luasnip",
+      {
+        "MattiasMTS/cmp-dbee", -- cmp extension for nvim-dbee
+        ft = "sql",
+        opts = {}, -- needed
+      },
     },
     config = function()
       require("config.cmp")
