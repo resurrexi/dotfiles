@@ -24,8 +24,7 @@ cmp.setup({
     {name = "nvim_lsp", max_item_count = 20}, -- tsserver likes to send back everything
     {name = "luasnip"},
     {name = "buffer" },
-    {name = "codeium"},
-    {name = "cmp-dbee"} -- nvim-dbee extension
+    {name = "codeium"}
   },
   formatting = {
     format = lspkind.cmp_format({
@@ -54,6 +53,15 @@ cmp.setup.cmdline({ "/", "?" }, {
 cmp.setup.cmdline(":", {
   sources = {
     {name = "path"},
-    {name = "cmdline"}
+    {
+      name = "cmdline",
+      option = {
+        ignore_cmds = {
+          "Man", -- default
+          "!", -- default
+          "Dbee" -- ignore due to errors being triggered for this plugin
+        }
+      }
+    }
   }
 })

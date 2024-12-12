@@ -101,6 +101,11 @@ require("lazy").setup({
         ft = "sql",
         opts = {}, -- needed
       },
+      opts = {
+        sources = {
+          {"cmp-dbee"} -- cmp extension for nvim-dbee
+        }
+      }
     },
     config = function()
       require("config.cmp")
