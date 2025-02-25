@@ -22,6 +22,9 @@ eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
 # asdf post-setup
 . $(brew --prefix asdf)/libexec/asdf.sh
 
+# duckdb post-setup
+export PATH=$HOME/.duckdb/cli/latest:$PATH
+
 {{- else if (eq .chezmoi.os "darwin") }}
 # MACOS-ONLY SETTINGS
 
