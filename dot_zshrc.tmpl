@@ -31,6 +31,9 @@ if [ -f "$HOME/google-cloud-sdk/completion.zsh.inc" ]; then source "$HOME/google
 
 {{- end }}
 
+# asdf post-setup
+export PATH="${ASDF_DATA_DIR:-$HOME/.asdf}/shims:$PATH"
+
 # poetry post-setup
 export PATH="$HOME/.local/bin:$PATH"
 
@@ -107,6 +110,7 @@ DISABLE_AUTO_UPDATE="true"
 plugins=(
     git
     poetry
+    asdf
     fzf
     fzf-tab
     zsh-autosuggestions
