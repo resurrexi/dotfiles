@@ -1,4 +1,6 @@
-require("toggleterm").setup({
+local tterm = require("toggleterm")
+
+tterm.setup({
   size = function(term)
     local stats = vim.api.nvim_list_uis()[1]
     local winWidth = stats.width
@@ -30,8 +32,14 @@ function _lazygit_toggle()
   lazygit:toggle()
 end
 
+function _send_visual_lines()
+  tterm.send_lines_to_terminal("visual_lines", false, { args = vim.v.count })
+end
+
 -- Set keymaps
 local opts = {noremap = true, silent = true}
 
 vim.api.nvim_set_keymap("n", "<leader>lg", "<Cmd>lua _lazygit_toggle()<CR>", opts)
 vim.api.nvim_set_keymap("n", "<leader>tf", "<Cmd>ToggleTerm direction=float<CR>", opts)
+vim.api.nvim_set_keymap("n", "<leader>t", "<Cmd>ToggleTermSendCurrentLine<CR>", opts)
+vim.api.nvim_set_keymap("v", "<leader>t", "<Cmd>lua _send_visual_lines()<CR>", opts)
