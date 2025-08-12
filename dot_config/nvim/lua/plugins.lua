@@ -95,17 +95,7 @@ require("lazy").setup({
       "hrsh7th/cmp-path",
       "hrsh7th/cmp-cmdline",
       {"L3MON4D3/LuaSnip", version = "v2.*"},
-      "saadparwaiz1/cmp_luasnip",
-      {
-        "MattiasMTS/cmp-dbee", -- cmp extension for nvim-dbee
-        ft = "sql",
-        opts = {}, -- needed
-      },
-      opts = {
-        sources = {
-          {"cmp-dbee"} -- cmp extension for nvim-dbee
-        }
-      }
+      "saadparwaiz1/cmp_luasnip"
     },
     config = function()
       require("config.cmp")
@@ -208,21 +198,6 @@ require("lazy").setup({
       require("config.zknvim")
     end
   },
-  {
-    "kndndrj/nvim-dbee",
-    dependencies = {
-      "MunifTanjim/nui.nvim",
-    },
-    build = function()
-      -- Install tries to automatically detect the install method.
-      -- if it fails, try calling it with one of these parameters:
-      --    "curl", "wget", "bitsadmin", "go"
-      require("dbee").install()
-    end,
-    config = function()
-      require("dbee").setup()
-    end,
-  },
 
   -- Language support
   {
@@ -234,7 +209,19 @@ require("lazy").setup({
     event = "BufEnter",
     config = function()
       require("codeium").setup({
-        enable_chat = true
+        enable_chat = true,
+        workspace_root = {
+          use_lsp = true,
+          find_root = nil,
+          paths = {
+            ".bzr",
+            ".git",
+            ".hg",
+            ".svn",
+            "_FOSSIL_",
+            "package.json",
+          }
+        }
       })
     end
   },

@@ -29,6 +29,8 @@ cmp.setup({
   formatting = {
     format = lspkind.cmp_format({
       mode = "symbol",
+      maxwidth = 50,
+      ellipsis_char = "...",
       symbol_map = { Codeium = "" },
       menu = ({
         buffer = "[Buffer]",
@@ -58,8 +60,7 @@ cmp.setup.cmdline(":", {
       option = {
         ignore_cmds = {
           "Man", -- default
-          "!", -- default
-          "Dbee" -- ignore due to errors being triggered for this plugin
+          "!" -- default
         }
       }
     }
