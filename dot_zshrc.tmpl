@@ -152,6 +152,7 @@ export VISUAL='nvim'
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 alias la="eza -la --group-directories-first --icons --color=always --group --git --git-repos | less -iXR"
 alias ls="n -e"
+alias avante='nvim -c "lua vim.defer_fn(function()require(\"avante.api\").zen_mode()end, 100)"'
 
 {{- if (eq .chezmoi.os "linux") }}
 
