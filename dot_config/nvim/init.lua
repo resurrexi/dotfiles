@@ -51,6 +51,9 @@ vim.opt.smartcase = true
 vim.opt.hlsearch = true
 vim.opt.incsearch = true
 
+-- avante.nvim recommendations
+vim.opt.laststatus = 3
+
 -- Optimizations
 local disabled_built_ins = {
   "netrw",
