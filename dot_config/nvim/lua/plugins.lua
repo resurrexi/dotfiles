@@ -265,6 +265,26 @@ require("lazy").setup({
           model = "deepseek-r1:8b",
         },
       },
+      selector = {
+        ---@alias avante.SelectorProvider "native" | "fzf_lua" | "mini_pick" | "snacks" | "telescope" | fun(selector: avante.ui.Selector): nil
+        ---@type avante.SelectorProvider
+        provider = "fzf_lua",
+        provider_opts = {},
+        exclude_auto_select = {}, -- List of items to exclude from auto selection
+      },
+      behaviour = {
+        auto_suggestions = false, -- Experimental stage
+        auto_set_highlight_group = true,
+        auto_set_keymaps = true,
+        auto_apply_diff_after_generation = false,
+        support_paste_from_clipboard = false,
+        minimize_diff = true, -- Whether to remove unchanged lines when applying a code block
+        enable_token_counting = true, -- Whether to enable token counting. Default to true.
+        auto_approve_tool_permissions = false, -- Default: show permission prompts for all tools
+        -- Examples:
+        -- auto_approve_tool_permissions = true,                -- Auto-approve all tools (no prompts)
+        -- auto_approve_tool_permissions = {"bash", "replace_in_file"}, -- Auto-approve specific tools only
+      },
     },
     dependencies = {
       "nvim-lua/plenary.nvim",
