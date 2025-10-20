@@ -108,8 +108,6 @@ DISABLE_AUTO_UPDATE="true"
 # INSTRUCTIONS FOR CHEZMOI
 # If custom plugin, add it via .chezmoiexternal.toml
 plugins=(
-    git
-    poetry
     asdf
     fzf
     fzf-tab
@@ -138,6 +136,7 @@ source $ZSH/oh-my-zsh.sh
 # fi
 export EDITOR='nvim'
 export VISUAL='nvim'
+export KUBE_EDITOR='nvim'
 
 # Compilation flags
 # export ARCHFLAGS="-arch x86_64"
