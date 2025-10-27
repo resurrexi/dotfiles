@@ -249,7 +249,7 @@ require("lazy").setup({
             },
         },
         ollama = {
-          endpoint = "http://constellux-srv:11434",
+          endpoint = "http://constellux-srv:7869",
           model = "deepseek-r1:8b",
         },
       },
