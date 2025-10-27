@@ -1,8 +1,48 @@
-local nvim_lsp = require("lspconfig")
-local cmp_capabilities = require("cmp_nvim_lsp").default_capabilities(vim.lsp.protocol.make_client_capabilities())
-local lsp_flags = {
-  debounce_text_changes = 150,
-}
+-- LSP attach
+vim.api.nvim_create_autocmd('LspAttach', {
+  group = vim.api.nvim_create_augroup('UserLspConfig', {}),
+  callback = function(args)
+    local bufnr = args.buf
+    local client = vim.lsp.get_client_by_id(args.data.client_id)
+    local lsp_mapper = function(mode, key, result)
+      vim.api.nvim_buf_set_keymap(
+        bufnr,
+        mode,
+        key,
+        "<Cmd>" .. result .. "<CR>",
+        { noremap = true, silent = true }
+      )
+    end
+
+    lsp_mapper("n", "K", "lua vim.lsp.buf.hover()")
+    lsp_mapper("n", "gd", "lua vim.lsp.buf.definition()")
+    lsp_mapper("n", "gds", "split | lua vim.lsp.buf.definition()")
+    lsp_mapper("n", "gdi", "vsplit | lua vim.lsp.buf.definition()")
+    lsp_mapper("n", "gr", "lua vim.lsp.buf.references()")
+    lsp_mapper("n", "gn", "lua vim.lsp.buf.type_definition()")
+    lsp_mapper("n", "gns", "split | lua vim.lsp.buf.type_definition()")
+    lsp_mapper("n", "gni", "vsplit | lua vim.lsp.buf.type_definition()")
+    lsp_mapper("n", "<leader>rn", "lua vim.lsp.buf.rename()")
+    lsp_mapper("n", "<leader>ca", "lua vim.lsp.buf.code_action()")
+    lsp_mapper("n", "<leader>]", "lua vim.diagnostic.goto_next()")
+    lsp_mapper("n", "<leader>[", "lua vim.diagnostic.goto_prev()")
+    lsp_mapper("i", "<C-k>", "lua vim.lsp.buf.signature_help()")
+
+    vim.bo[bufnr].omnifunc = 'v:lua.vim.lsp.omnifunc'
+
+    -- Auto-format on save
+    if not client:supports_method('textDocument/willSaveWaitUntil')
+        and client:supports_method('textDocument/formatting') then
+      vim.api.nvim_create_autocmd('BufWritePre', {
+        group = vim.api.nvim_create_augroup('UserFormatOnSave', {clear=false}),
+        buffer = args.buf,
+        callback = function()
+          vim.lsp.buf.format({ bufnr = args.buf, id = client.id })
+        end,
+      })
+    end
+  end,
+})
 
 -- Transparent bg on diagnostics
 vim.cmd([[
@@ -47,35 +87,14 @@ vim.diagnostic.config({
 })
 
 -- LSP servers
-nvim_lsp.ts_ls.setup({
-  on_attach = require("config.lsp_attach").on_attach,
-  capabilities = cmp_capabilities,
-  flags = lsp_flags,
-})
-nvim_lsp.pyright.setup({
-  on_attach = require("config.lsp_attach").on_attach,
-  capabilities = cmp_capabilities,
-  flags = lsp_flags,
-})
-nvim_lsp.solidity_ls.setup({
-  on_attach = require("config.lsp_attach").on_attach,
-  capabilities = cmp_capabilities,
-  flags = lsp_flags,
-})
-nvim_lsp.prismals.setup({
-  on_attach = require("config.lsp_attach").on_attach,
-  capabilities = cmp_capabilities,
-  flags = lsp_flags,
-})
-nvim_lsp.tailwindcss.setup({
-  on_attach = require("config.lsp_attach").on_attach,
-  capabilities = cmp_capabilities,
-  flags = lsp_flags,
-})
+vim.lsp.enable("ts_ls")
+vim.lsp.enable("pyright")
+vim.lsp.enable("prismals")
+vim.lsp.enable("tailwindcss")
 
 -- Setup diagnostic clients
 -- https://github.com/iamcco/coc-diagnostic/blob/master/src/config.ts
-nvim_lsp.diagnosticls.setup({
+vim.lsp.config('diagnosticls', {
   on_attach = require("config.lsp_attach").on_attach,
   filetypes = {
     'python',
@@ -88,7 +107,6 @@ nvim_lsp.diagnosticls.setup({
     'less',
     'scss',
     'markdown',
-    'solidity',
     'sql'
   },
   init_options = {
@@ -154,32 +172,6 @@ nvim_lsp.diagnosticls.setup({
         offsetColumn = 1,
         formatLines = 1
       },
-      flake8 = {
-        command = 'flake8',
-        debounce = 500,
-        args = { '--format=%(row)d,%(col)d,%(code).1s,%(code)s: %(text)s', '-' },
-        rootPatterns = { '.flake8', 'setup.cfg', 'tox.ini' },
-        offsetLine = 0,
-        offsetColumn = 0,
-        sourceName = 'flake8',
-        formatLines = 1,
-        formatPattern = {
-          '(\\d+),(\\d+),([A-Z]),(.*)(\\r|\\n)*$',
-          {
-            line = 1,
-            column = 2,
-            security = 3,
-            message = 4
-          }
-        },
-        securities = {
-          W = 'warning',
-          E = 'error',
-          F = 'error',
-          C = 'error',
-          N = 'error'
-        }
-      },
       ruff = {
         command = 'ruff',
         debounce = 500,
@@ -198,40 +190,14 @@ nvim_lsp.diagnosticls.setup({
           safe = 'warning',
           unsafe = 'error'
         }
-      },
-      solhint = {
-        command = './node_modules/.bin/solhint',
-        rootPatterns = {
-          '.solhint.json',
-        },
-        debounce = 500,
-        args = { '--formatter', 'unix', '%filepath' },
-        sourceName = 'solhint',
-        offsetLine = 0,
-        offsetColumn = 0,
-        formatLines = 1,
-        formatPattern = {
-          '^[^:]+:(\\d+):(\\d+):\\s+([^\\[]+)\\[([A-z]+)\\/?[a-z-]*\\]$',
-          {
-            line = 1,
-            column = 2,
-            security = 4,
-            message = 3
-          }
-        },
-        securities = {
-          Error = 'error',
-          Warning = 'warning'
-        }
       }
     },
     filetypes = {
-      python = { 'pylint', 'flake8', 'ruff' },
+      python = { 'pylint', 'ruff' },
       javascript = 'eslint',
       javascriptreact = 'eslint',
       typescript = 'eslint',
       typescriptreact = 'eslint',
-      solidity = 'solhint'
     },
     formatters = {
       prettier = {
@@ -250,16 +216,6 @@ nvim_lsp.diagnosticls.setup({
           'prettier.config.js',
           'prettier.config.cjs'
         }
-      },
-      black = {
-        command = 'black',
-        args = { '--quiet', '-' },
-        rootPatterns = { 'pyproject.toml' }
-      },
-      isort = {
-        command = 'isort',
-        args = { '--quiet', '-' },
-        rootPatterns = { 'pyproject.toml', '.isort.cfg' }
       },
       ruff_fmt = {
         command = 'ruff',
@@ -282,7 +238,7 @@ nvim_lsp.diagnosticls.setup({
       }
     },
     formatFiletypes = {
-      python = { 'black', 'isort', 'ruff_fmt', 'ruff_isort' },
+      python = { 'ruff_fmt', 'ruff_isort' },
       css = 'prettier',
       javascript = 'prettier',
       javascriptreact = 'prettier',
@@ -293,9 +249,9 @@ nvim_lsp.diagnosticls.setup({
       typescriptreact = 'prettier',
       json = 'prettier',
       markdown = 'prettier',
-      solidity = 'prettier',
       rust = 'rustfmt',
       sql = 'sqlfmt'
     }
   }
 })
+vim.lsp.enable('diagnosticls')
