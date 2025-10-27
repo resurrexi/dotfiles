@@ -251,6 +251,7 @@ require("lazy").setup({
         ollama = {
           endpoint = "http://constellux-srv:7869",
           model = "deepseek-r1:8b",
+          timeout = 300000,
         },
       },
       selector = {
