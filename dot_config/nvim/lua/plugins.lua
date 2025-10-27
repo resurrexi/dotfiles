@@ -237,7 +237,7 @@ require("lazy").setup({
     opts = {
       instructions_file = "avante.md",
       -- for example
-      provider = "ollama",
+      provider = "openrouter",
       providers = {
         claude = {
           endpoint = "https://api.anthropic.com",
@@ -253,6 +253,11 @@ require("lazy").setup({
           model = "qwen3-coder:30b",
           timeout = 300000,
         },
+        openrouter = {
+          __inherited_from = 'openai',
+          endpoint = 'https://openrouter.ai/api/v1',
+          model = 'qwen/qwen3-coder:free',
+        }
       },
       selector = {
         ---@alias avante.SelectorProvider "native" | "fzf_lua" | "mini_pick" | "snacks" | "telescope" | fun(selector: avante.ui.Selector): nil
