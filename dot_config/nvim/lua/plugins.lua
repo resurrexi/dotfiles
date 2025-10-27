@@ -251,7 +251,6 @@ require("lazy").setup({
         ollama = {
           endpoint = "http://constellux-srv:11434",
           model = "deepseek-r1:8b",
-          is_env_set = require("avante.providers.ollama").check_endpoint_alive,
         },
       },
       selector = {
