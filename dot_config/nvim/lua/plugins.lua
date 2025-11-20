@@ -256,7 +256,7 @@ require("lazy").setup({
         openrouter = {
           __inherited_from = 'openai',
           endpoint = 'https://openrouter.ai/api/v1',
-          model = 'qwen/qwen3-coder:free',
+          model = 'qwen/qwen3-coder',
         }
       },
       selector = {
