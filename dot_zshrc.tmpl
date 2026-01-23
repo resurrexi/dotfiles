@@ -254,3 +254,17 @@ alias auth_hearst='
   gcloud auth application-default login
 '
 {{- end }}
+
+# block/goose settings
+export GOOSE_MAX_TURNS=45
+export GOOSE_SUBAGENT_MAX_TURNS=9
+export GOOSE_CLI_SHOW_COST=true
+export GOOSE_RANDOM_THINKING_MESSAGES=false
+export GOOSE_AUTO_COMPACT_THRESHOLD=0.45
+export GOOSE_PROVIDER="openrouter"
+export GOOSE_MODEL="minimax/minimax-m2.1"
+export GOOSE_LEAD_PROVIDER="openrouter"
+export GOOSE_LEAD_MODEL="qwen/qwen3-coder"
+export GOOSE_LEAD_TURNS=5
+export GOOSE_PLANNER_PROVIDER="openrouter"
+export GOOSE_PLANNER_MODEL="google/gemini-3-flash-preview"
