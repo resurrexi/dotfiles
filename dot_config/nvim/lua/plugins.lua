@@ -192,7 +192,7 @@ require("lazy").setup({
       ft = { "markdown", "Avante" },
   },
   {
-    "mickael-menu/zk-nvim",
+    "zk-org/zk-nvim",
     dependencies = { "neovim/nvim-lspconfig" },
     config = function()
       require("config.zknvim")
