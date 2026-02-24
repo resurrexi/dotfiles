@@ -288,21 +288,5 @@ require("lazy").setup({
       "ibhagwan/fzf-lua", -- for file_selector provider fzf
       "nvim-tree/nvim-web-devicons", -- or echasnovski/mini.icons
     },
-  },
-  {
-    "simrat39/rust-tools.nvim",
-    dependencies = { "neovim/nvim-lspconfig" },
-    ft = { "rust" },
-    config = function()
-      require("config.rust-tools")
-    end
-  },
-  {
-    "TovarishFin/vim-solidity",
-    ft = { "solidity" }
-  },
-  {
-    "prisma/vim-prisma",
-    ft = { "prisma" }
-  },
+  }
 })
