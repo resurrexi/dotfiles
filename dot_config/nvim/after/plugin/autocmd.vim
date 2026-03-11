@@ -39,3 +39,7 @@ au SourcePost * hi Normal guibg=none ctermbg=none
   \ | hi NonText guibg=none ctermbg=none
   \ | hi CursorLineNr guibg=none ctermbg=none
   \ | hi FloatBorder guibg=none ctermbg=none
+
+" Gopass security
+autocmd BufNewFile,BufRead /dev/shm/gopass* setlocal noswapfile nobackup noundofile shada=""
+autocmd BufNewFile,BufRead /private/**/gopass** setlocal noswapfile nobackup noundofile shada=""
