@@ -138,40 +138,6 @@ vim.lsp.config('diagnosticls', {
           [1] = 'warning'
         }
       },
-      pylint = {
-        sourceName = 'pylint',
-        command = 'pylint',
-        debounce = 500,
-        args = {
-          '--output-format',
-          'text',
-          '--score',
-          'no',
-          '--msg-template',
-          "'{line}:{column}:{category}:{msg} ({msg_id}:{symbol})'",
-          '%file'
-        },
-        formatPattern = {
-          "^(\\d+?):(\\d+?):([a-z]+?):(.*)$",
-          {
-            line = 1,
-            column = 2,
-            security = 3,
-            message = 4
-          }
-        },
-        rootPatterns = { '.git', 'pyproject.toml', 'setup.py', '.pylintrc' },
-        securities = {
-          informational = 'hint',
-          refactor = 'info',
-          convention = 'info',
-          warning = 'warning',
-          error = 'error',
-          fatal = 'error'
-        },
-        offsetColumn = 1,
-        formatLines = 1
-      },
       ruff = {
         command = 'ruff',
         debounce = 500,
@@ -193,7 +159,7 @@ vim.lsp.config('diagnosticls', {
       }
     },
     filetypes = {
-      python = { 'pylint', 'ruff' },
+      python = { 'ruff' },
       javascript = 'eslint',
       javascriptreact = 'eslint',
       typescript = 'eslint',
