@@ -258,7 +258,7 @@ require("lazy").setup({
         openrouter = {
           __inherited_from = 'openai',
           endpoint = 'https://openrouter.ai/api/v1',
-          api_key_name = "OPENROUTER_API_KEY",
+          api_key_name = "OPENROUTER_API_KEY", -- pragma: allowlist secret
           model = 'qwen/qwen3-coder',
         }
       },
