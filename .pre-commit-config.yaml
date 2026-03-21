@@ -1,0 +1,13 @@
+repos:
+  # Full-repo secret scan on every commit (tracked files)
+  - repo: local
+    hooks:
+      - id: detect-secrets-full-repo
+        name: detect-secrets (full repository)
+        language: python
+        additional_dependencies:
+          - detect-secrets==1.5.0
+        entry: >-
+          bash -c 'git ls-files -z | xargs -0 detect-secrets-hook'
+        pass_filenames: false
+        always_run: true
