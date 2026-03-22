@@ -237,19 +237,10 @@ require("lazy").setup({
     ---@module 'avante'
     ---@type avante.Config
     opts = {
-      instructions_file = "avante.md",
+      instructions_file = "AGENTS.md",
       -- for example
-      provider = "openrouter",
+      provider = "goose",
       providers = {
-        claude = {
-          endpoint = "https://api.anthropic.com",
-          model = "claude-sonnet-4-20250514",
-          timeout = 30000, -- Timeout in milliseconds
-            extra_request_body = {
-              temperature = 0.75,
-              max_tokens = 20480,
-            },
-        },
         ollama = {
           endpoint = "http://constellux-srv:7869",
           model = "qwen3-coder:30b",
@@ -261,6 +252,12 @@ require("lazy").setup({
           api_key_name = "OPENROUTER_API_KEY", -- pragma: allowlist secret
           model = 'qwen/qwen3-coder',
         }
+      },
+      acp_providers = {
+        ["goose"] = {
+          command = "goose",
+          args = { "acp" },
+        },
       },
       selector = {
         ---@alias avante.SelectorProvider "native" | "fzf_lua" | "mini_pick" | "snacks" | "telescope" | fun(selector: avante.ui.Selector): nil
