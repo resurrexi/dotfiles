@@ -121,12 +121,26 @@ extensions:
     timeout: 300
     bundled: null
     available_tools: []
+  adrflow:
+    enabled: true
+    type: stdio
+    name: ADRFlow
+    description: Capture architectural decisions
+    cmd: npx
+    args:
+    - -y
+    - adrflow
+    envs: {}
+    env_keys: []
+    timeout: 300
+    bundled: null
+    available_tools: []
 slash_commands:
 - command: implement-plan
-  recipe_path: "./recipes/rpi-implement.yaml"
+  recipe_path: ./recipes/rpi-implement.yaml
 - command: iterate-plan
-  recipe_path: "./recipes/rpi-iterate.yaml"
+  recipe_path: ./recipes/rpi-iterate.yaml
 - command: create-plan
-  recipe_path: "./recipes/rpi-plan.yaml"
+  recipe_path: ./recipes/rpi-plan.yaml
 - command: research-codebase
-  recipe_path: "./recipes/rpi-research.yaml"
+  recipe_path: ./recipes/rpi-research.yaml
