@@ -135,6 +135,15 @@ extensions:
     timeout: 300
     bundled: null
     available_tools: []
+  memory:
+    enabled: true
+    type: builtin
+    name: memory
+    description: Tools to save and retrieve durable memories
+    display_name: Memory
+    timeout: 300
+    bundled: true
+    available_tools: []
 slash_commands:
 - command: implement-plan
   recipe_path: ./recipes/rpi-implement.yaml
