@@ -20,7 +20,7 @@ extensions:
     bundled: true
     available_tools: []
   todo:
-    enabled: true
+    enabled: false
     type: platform
     name: todo
     description: Enable a todo list for goose so it can keep track of what it is doing
@@ -28,7 +28,7 @@ extensions:
     bundled: true
     available_tools: []
   tom:
-    enabled: true
+    enabled: false
     type: platform
     name: tom
     description: Inject custom context into every turn via GOOSE_MOIM_MESSAGE_TEXT and GOOSE_MOIM_MESSAGE_FILE environment variables
@@ -84,14 +84,6 @@ extensions:
     display_name: Analyze
     bundled: true
     available_tools: []
-  summarize:
-    enabled: false
-    type: platform
-    name: summarize
-    description: Load files/directories and get an LLM summary in a single call
-    display_name: Summarize
-    bundled: true
-    available_tools: []
   goosedocs:
     enabled: true
     type: stdio
@@ -136,13 +128,28 @@ extensions:
     bundled: null
     available_tools: []
   memory:
-    enabled: true
+    enabled: false
     type: builtin
     name: memory
     description: Tools to save and retrieve durable memories
     display_name: Memory
     timeout: 300
     bundled: true
+    available_tools: []
+  openspacemcp:
+    enabled: true
+    type: stdio
+    name: OpenSpace MCP
+    description: Unlock superpowers with OpenSpace
+    cmd: openspace-mcp
+    args: []
+    envs: {}
+    env_keys:
+    - OPENSPACE_HOST_SKILL_DIRS
+    - OPENSPACE_WORKSPACE
+    - OPENSPACE_API_KEY
+    timeout: 600
+    bundled: null
     available_tools: []
 slash_commands:
 - command: implement-plan
@@ -153,3 +160,4 @@ slash_commands:
   recipe_path: ./recipes/rpi-plan.yaml
 - command: research-codebase
   recipe_path: ./recipes/rpi-research.yaml
+CURSOR_AGENT_COMMAND: agent
