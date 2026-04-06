@@ -277,3 +277,10 @@ export GOOSE_LEAD_MODEL="openai/gpt-5.3-codex"
 export GOOSE_PLANNER_MODEL="openai/gpt-5.4"
 
 {{- end }}
+
+# bun completions
+[ -s "$HOME/.bun/_bun" ] && source "$HOME/.bun/_bun"
+
+# bun
+export BUN_INSTALL="$HOME/.bun"
+export PATH="$BUN_INSTALL/bin:$PATH"
