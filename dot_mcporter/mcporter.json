@@ -1,0 +1,12 @@
+{
+  "mcpServers": {
+    "openspace": {
+      "command": "openspace-mcp",
+      "env": {
+        "OPENSPACE_HOST_SKILL_DIRS": "$env:OPENSPACE_HOST_SKILL_DIRS",
+        "OPENSPACE_WORKSPACE": "$env:OPENSPACE_WORKSPACE",
+        "OPENSPACE_API_KEY": "$env:OPENSPACE_API_KEY"
+      }
+    }
+  }
+}
