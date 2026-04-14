@@ -55,7 +55,7 @@ cmp.setup({
       symbol_map = {
         Codeium = "",
       {{- if (eq .chezmoi.hostname "WKSMAC25457") }}
-        Copilot = ""
+        Copilot = "",
       {{- end }}
       },
       menu = ({
@@ -66,8 +66,8 @@ cmp.setup({
         latex_symbols = "[Latex]",
         codeium = "[Codeium]",
       {{- if (eq .chezmoi.hostname "WKSMAC25457") }}
-        copilot = "[Copilot]"
-      {{- end}
+        copilot = "[Copilot]",
+      {{- end }}
       })
     })
   }
