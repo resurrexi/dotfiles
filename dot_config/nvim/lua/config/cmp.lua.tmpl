@@ -39,12 +39,12 @@ cmp.setup({
     ["<CR>"] = cmp.mapping.confirm({select = true})
   },
   sources = {
-    {name = "nvim_lsp", max_item_count = 20}, -- tsserver likes to send back everything
-    {name = "luasnip"},
-    {name = "buffer" },
-    {name = "codeium"},
+    {name = "nvim_lsp", max_item_count = 9, group_index = 2}, -- tsserver likes to send back everything
+    {name = "luasnip", group_index = 2},
+    {name = "buffer", group_index = 2},
+    {name = "codeium", group_index = 2},
   {{- if (eq .chezmoi.hostname "WKSMAC25457") }}
-    {name = "copilot"},
+    {name = "copilot", group_index = 2},
   {{- end }}
   },
   formatting = {
