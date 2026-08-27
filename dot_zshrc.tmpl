@@ -22,9 +22,6 @@ eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
 # duckdb post-setup
 export PATH=$HOME/.duckdb/cli/latest:$PATH
 
-# Pi
-export PATH="$HOME/.asdf/installs/nodejs/.npm/bin:$PATH"
-
 {{- else if (eq .chezmoi.os "darwin") }}
 # MACOS-ONLY SETTINGS
 
@@ -264,3 +261,6 @@ alias auth_hearst='
 # bun
 export BUN_INSTALL="$HOME/.bun"
 export PATH="$BUN_INSTALL/bin:$PATH"
+
+# Pi
+export PATH="$HOME/.asdf/installs/nodejs/.npm/bin:$PATH"
