@@ -89,135 +89,134 @@ vim.diagnostic.config({
 -- LSP servers
 vim.lsp.enable("ts_ls")
 vim.lsp.enable("pyright")
-vim.lsp.enable("prismals")
 vim.lsp.enable("tailwindcss")
 
 -- Setup diagnostic clients
 -- https://github.com/iamcco/coc-diagnostic/blob/master/src/config.ts
-vim.lsp.config('diagnosticls', {
-  on_attach = require("config.lsp_attach").on_attach,
-  filetypes = {
-    'python',
-    'javascript',
-    'javascriptreact',
-    'json',
-    'typescript',
-    'typescriptreact',
-    'css',
-    'less',
-    'scss',
-    'markdown',
-    'sql'
-  },
-  init_options = {
-    linters = {
-      eslint = {
-        command = './node_modules/.bin/eslint',
-        rootPatterns = {
-          '.eslintrc.js',
-          '.eslintrc.cjs',
-          '.eslintrc.yaml',
-          '.eslintrc.yml',
-          '.eslintrc.json',
-          'package.json'
-        },
-        debounce = 500,
-        args = { '--stdin', '--stdin-filename', '%filepath', '--format', 'json' },
-        sourceName = 'eslint',
-        parseJson = {
-          errorsRoot = '[0].messages',
-          line = 'line',
-          column = 'column',
-          endLine = 'endLine',
-          endColumn = 'endColumn',
-          message = '${message} [${ruleId}]',
-          security = 'severity'
-        },
-        securities = {
-          [2] = 'error',
-          [1] = 'warning'
-        }
-      },
-      ruff = {
-        command = 'ruff',
-        debounce = 500,
-        args = { 'check', '--output-format', 'json', '%filepath' },
-        rootPatterns = { 'pyproject.toml', 'ruff.toml' },
-        sourceName = 'ruff',
-        parseJson = {
-          line = 'location.row',
-          column = 'location.column',
-          endLine = 'end_location.row',
-          endColumn = 'end_location.column',
-          message = '${message} [${code}]',
-          security = 'fix.applicability'
-        },
-        securities = {
-          safe = 'warning',
-          unsafe = 'error'
-        }
-      }
-    },
-    filetypes = {
-      python = { 'ruff' },
-      javascript = 'eslint',
-      javascriptreact = 'eslint',
-      typescript = 'eslint',
-      typescriptreact = 'eslint',
-    },
-    formatters = {
-      prettier = {
-        command = './node_modules/.bin/prettier',
-        args = { '--stdin-filepath', '%filepath' },
-        rootPatterns = {
-          '.prettierrc',
-          '.prettierrc.json',
-          '.prettierrc.toml',
-          '.prettierrc.json',
-          '.prettierrc.yml',
-          '.prettierrc.yaml',
-          '.prettierrc.json5',
-          '.prettierrc.js',
-          '.prettierrc.cjs',
-          'prettier.config.js',
-          'prettier.config.cjs'
-        }
-      },
-      ruff_fmt = {
-        command = 'ruff',
-        args = { 'format', '--quiet', '-' },
-        rootPatterns = { 'pyproject.toml', 'ruff.toml' }
-      },
-      ruff_isort = {
-        command = 'ruff',
-        args = { 'check', '--select', 'I', '--fix', '--quiet', '-' },
-        rootPatterns = { 'pyproject.toml', 'ruff.toml' }
-      },
-      rustfmt = {
-        command = 'rustfmt',
-        rootPatterns = { 'Cargo.toml' }
-      },
-      sqlfmt = {
-        command = 'sqlfmt',
-        args = { '--quiet', '-' },
-        rootPatterns = { 'dbt_project.toml' }
-      }
-    },
-    formatFiletypes = {
-      python = { 'ruff_fmt', 'ruff_isort' },
-      css = 'prettier',
-      javascript = 'prettier',
-      javascriptreact = 'prettier',
-      json = 'prettier',
-      scss = 'prettier',
-      less = 'prettier',
-      typescript = 'prettier',
-      typescriptreact = 'prettier',
-      json = 'prettier',
-      markdown = 'prettier',
-      rust = 'rustfmt',
-      sql = 'sqlfmt'
-    }
-  }
-})
-vim.lsp.enable('diagnosticls')
+-- vim.lsp.config('diagnosticls', {
+--   on_attach = require("config.lsp_attach").on_attach,
+--   filetypes = {
+--     'python',
+--     'javascript',
+--     'javascriptreact',
+--     'json',
+--     'typescript',
+--     'typescriptreact',
+--     'css',
+--     'less',
+--     'scss',
+--     'markdown',
+--     'sql'
+--   },
+--   init_options = {
+--     linters = {
+--       eslint = {
+--         command = './node_modules/.bin/eslint',
+--         rootPatterns = {
+--           '.eslintrc.js',
+--           '.eslintrc.cjs',
+--           '.eslintrc.yaml',
+--           '.eslintrc.yml',
+--           '.eslintrc.json',
+--           'package.json'
+--         },
+--         debounce = 500,
+--         args = { '--stdin', '--stdin-filename', '%filepath', '--format', 'json' },
+--         sourceName = 'eslint',
+--         parseJson = {
+--           errorsRoot = '[0].messages',
+--           line = 'line',
+--           column = 'column',
+--           endLine = 'endLine',
+--           endColumn = 'endColumn',
+--           message = '${message} [${ruleId}]',
+--           security = 'severity'
+--         },
+--         securities = {
+--           [2] = 'error',
+--           [1] = 'warning'
+--         }
+--       },
+--       ruff = {
+--         command = 'ruff',
+--         debounce = 500,
+--         args = { 'check', '--output-format', 'json', '%filepath' },
+--         rootPatterns = { 'pyproject.toml', 'ruff.toml' },
+--         sourceName = 'ruff',
+--         parseJson = {
+--           line = 'location.row',
+--           column = 'location.column',
+--           endLine = 'end_location.row',
+--           endColumn = 'end_location.column',
+--           message = '${message} [${code}]',
+--           security = 'fix.applicability'
+--         },
+--         securities = {
+--           safe = 'warning',
+--           unsafe = 'error'
+--         }
+--       }
+--     },
+--     filetypes = {
+--       python = { 'ruff' },
+--       javascript = 'eslint',
+--       javascriptreact = 'eslint',
+--       typescript = 'eslint',
+--       typescriptreact = 'eslint',
+--     },
+--     formatters = {
+--       prettier = {
+--         command = './node_modules/.bin/prettier',
+--         args = { '--stdin-filepath', '%filepath' },
+--         rootPatterns = {
+--           '.prettierrc',
+--           '.prettierrc.json',
+--           '.prettierrc.toml',
+--           '.prettierrc.json',
+--           '.prettierrc.yml',
+--           '.prettierrc.yaml',
+--           '.prettierrc.json5',
+--           '.prettierrc.js',
+--           '.prettierrc.cjs',
+--           'prettier.config.js',
+--           'prettier.config.cjs'
+--         }
+--       },
+--       ruff_fmt = {
+--         command = 'ruff',
+--         args = { 'format', '--quiet', '-' },
+--         rootPatterns = { 'pyproject.toml', 'ruff.toml' }
+--       },
+--       ruff_isort = {
+--         command = 'ruff',
+--         args = { 'check', '--select', 'I', '--fix', '--quiet', '-' },
+--         rootPatterns = { 'pyproject.toml', 'ruff.toml' }
+--       },
+--       rustfmt = {
+--         command = 'rustfmt',
+--         rootPatterns = { 'Cargo.toml' }
+--       },
+--       sqlfmt = {
+--         command = 'sqlfmt',
+--         args = { '--quiet', '-' },
+--         rootPatterns = { 'dbt_project.toml' }
+--       }
+--     },
+--     formatFiletypes = {
+--       python = { 'ruff_fmt', 'ruff_isort' },
+--       css = 'prettier',
+--       javascript = 'prettier',
+--       javascriptreact = 'prettier',
+--       json = 'prettier',
+--       scss = 'prettier',
+--       less = 'prettier',
+--       typescript = 'prettier',
+--       typescriptreact = 'prettier',
+--       json = 'prettier',
+--       markdown = 'prettier',
+--       rust = 'rustfmt',
+--       sql = 'sqlfmt'
+--     }
+--   }
+-- })
+-- vim.lsp.enable('diagnosticls')

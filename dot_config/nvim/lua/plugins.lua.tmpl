@@ -32,6 +32,64 @@ require("lazy").setup({
       require("config.treesitter")
     end
   },
+  {
+    "mason-org/mason.nvim",
+    opts = {
+      ui = {
+        icons = {
+          package_installed = "✓",
+          package_pending = "➜",
+          package_uninstalled = "✗"
+        }
+      }
+    }
+  },
+  {
+    "mfussenegger/nvim-lint",
+    event = { "BufReadPre", "BufNewFile" },
+    config = function()
+      local lint = require("lint")
+      lint.linters_by_ft = {
+        javascript = { "eslint_d" },
+        javascriptreact = { "eslint_d" },
+        typescript = { "eslint_d" },
+        typescriptreact = { "eslint_d" },
+        python = { "ruff" },
+      }
+      -- Optional: Auto-lint on save
+      local lint_autocmd = vim.api.nvim_create_autocmd({ "BufWritePost" }, {
+        callback = function()
+          vim.schedule(function()
+            lint.try_lint()
+          end)
+        end,
+      })
+    end,
+  },
+  {
+    "stevearc/conform.nvim",
+    event = { "BufReadPre", "BufNewFile" },
+    config = function()
+      local conform = require("conform")
+      conform.setup({
+        formatters_by_ft = {
+          css = { "prettier" },
+          json = { "prettier" },
+          markdown = { "prettier" },
+          javascript = { "prettier" },
+          javascriptreact = { "prettier" },
+          typescript = { "prettier" },
+          typescriptreact = { "prettier" },
+          python = { "ruff" },
+        },
+        format_on_save = {
+          lsp_fallback = true,
+          async = false,
+          timeout_ms = 500,
+        },
+      })
+    end,
+  },
 
   -- Essentials
   {
@@ -239,16 +297,11 @@ require("lazy").setup({
       -- for example
       provider = "openrouter",
       providers = {
-        ollama = {
-          endpoint = "http://constellux-srv:7869",
-          model = "qwen3-coder:30b",
-          timeout = 300000,
-        },
         openrouter = {
           __inherited_from = 'openai',
           endpoint = 'https://openrouter.ai/api/v1',
           api_key_name = "OPENROUTER_API_KEY",
-          model = 'qwen/qwen3-coder',
+          model = 'z-ai/glm-5.3-flash',
         }
       },
       selector = {
