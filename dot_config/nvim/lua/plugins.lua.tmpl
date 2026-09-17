@@ -256,6 +256,14 @@ require("lazy").setup({
       require("config.zknvim")
     end
   },
+  {{ if eq .chezmoi.kernel.osrelease "6.18.33.2-microsoft-standard-WSL2" -}}
+    {
+      "lmgraf/wsl-clipboard.nvim",
+      opts = {
+        mode = "sync",
+      }
+    },
+  {{- end }}
 
   -- Language support
   {
