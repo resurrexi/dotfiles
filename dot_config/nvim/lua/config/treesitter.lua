@@ -1,4 +1,4 @@
-require("nvim-treesitter.config").setup({
+require("nvim-treesitter").setup({
   highlight = {
     enable = true,
     additional_vim_regex_highlighting = {
