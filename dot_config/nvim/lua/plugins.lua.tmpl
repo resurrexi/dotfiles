@@ -267,31 +267,6 @@ require("lazy").setup({
 
   -- Language support
   {
-    "Exafunction/windsurf.nvim",
-    dependencies = {
-      "nvim-lua/plenary.nvim",
-      "hrsh7th/nvim-cmp",
-    },
-    event = "BufEnter",
-    config = function()
-      require("codeium").setup({
-        enable_chat = true,
-        workspace_root = {
-          use_lsp = true,
-          find_root = nil,
-          paths = {
-            ".bzr",
-            ".git",
-            ".hg",
-            ".svn",
-            "_FOSSIL_",
-            "package.json",
-          }
-        }
-      })
-    end
-  },
-  {
     "yetone/avante.nvim",
     build = vim.fn.has("win32") ~= 0
         and "powershell -ExecutionPolicy Bypass -File Build.ps1 -BuildFromSource false"
@@ -326,6 +301,7 @@ require("lazy").setup({
     dependencies = {
       "nvim-lua/plenary.nvim",
       "MunifTanjim/nui.nvim",
+      { "ColinKennedy/mega.cmdparse", dependencies = { "ColinKennedy/mega.logging" } },
       --- The below dependencies are optional,
       "hrsh7th/nvim-cmp", -- autocompletion for avante commands and mentions
       "ibhagwan/fzf-lua", -- for file_selector provider fzf
