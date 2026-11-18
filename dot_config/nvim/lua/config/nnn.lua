@@ -2,16 +2,15 @@ local builtin = require("nnn").builtin
 
 require("nnn").setup({
   explorer = {
-    cmd = "nnn -Go"
+    cmd = "nnn -Go"  -- `G` flag to show git status
   },
   picker = {
-    cmd = "nnn -Go",
+    cmd = "nnn -Go", -- `G` flag to show git status
     session = "shared"
   },
   mappings = {
-    {"<leader>t", builtin.open_in_tab},
-    {"<leader>s", builtin.open_in_split},
-    {"<leader>i", builtin.open_in_vsplit}
+    {"<leader>r", builtin.open_in_split},
+    {"<leader>d", builtin.open_in_vsplit}
   }
 })
 
