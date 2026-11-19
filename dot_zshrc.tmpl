@@ -22,7 +22,7 @@ eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
 # duckdb post-setup
 export PATH=$HOME/.duckdb/cli/latest:$PATH
 
-export SSL_CERT_DIR=$HOME/.sslcerts
+export SSL_CERT_FILE=$HOME/.sslcerts/caddy-nudelle-root.crt
 
 {{- else if (eq .chezmoi.os "darwin") }}
 # MACOS-ONLY SETTINGS
